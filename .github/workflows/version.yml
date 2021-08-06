@@ -1,0 +1,29 @@
+name: Bump Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'patch | minor | major'
+        default: ''
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15
+      - run: npm install
+      - run: git checkout package-lock.json
+      - run: git status
+      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+      - run: |
+          npm version ${{ github.event.inputs.version }}
+          git push origin main
+          git push --tags
