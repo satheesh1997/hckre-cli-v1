@@ -68,7 +68,14 @@ export default class SSM extends Command {
       let availableInstances = []
 
       if (fs.existsSync(instanceCahceListPath)) {
+        cli.action.start(`${chalk.green('?')} ${chalk.bold(`Fetching targets from cache`)}`)
         availableInstances = JSON.parse(fs.readFileSync(instanceCahceListPath).toString())
+        cli.action.stop(`${chalk.cyan('done')}`)
+        cli.info(
+          `${chalk.green('?')} ${chalk.bold(
+            `Use ${chalk.redBright('aws:ssm -r')} to update the cache`
+          )}... ${chalk.cyan('tip')}`
+        )
       } else {
         cli.action.start(`${chalk.green('?')} ${chalk.bold(`Fetching targets running in ${ctx.AWSProfile}`)}`)
         availableInstances = await findInstances()
