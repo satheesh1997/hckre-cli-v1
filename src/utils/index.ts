@@ -82,7 +82,7 @@ export function createCLIDefaultConfigFile(ctx: any) {
   configParser.set('basic', 'path', DEFAULT_DEPLOYMENT_PATH)
 
   configParser.set('mcs', 'git', '')
-  configParser.set('mcs', 'path', DEFAULT_MCS_DIR)
+  configParser.set('mcs', 'dir', DEFAULT_MCS_DIR)
 
   configParser.set('git', 'name', '')
   configParser.set('git', 'email', '')
