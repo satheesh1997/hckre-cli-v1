@@ -4,7 +4,7 @@ import * as chalk from 'chalk'
 import * as fs from 'fs'
 
 const hook: Hook<'init'> = async function (opts) {
-  if (opts.id == "readme") {
+  if (opts.id == 'readme') {
     return
   }
   if (!fs.existsSync(`${opts.config.configDir}/hckre.ini`) && opts.id !== 'init') {

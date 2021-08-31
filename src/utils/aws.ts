@@ -15,7 +15,11 @@ const getManagedInstances = (): any => {
     let nextToken = ''
     const loop = () => {
       ssm.describeInstanceInformation(
-        { MaxResults: 50, InstanceInformationFilterList: [{ key: 'ResourceType', valueSet: ['EC2Instance'] }] },
+        {
+          MaxResults: 50,
+          InstanceInformationFilterList: [{ key: 'ResourceType', valueSet: ['EC2Instance'] }],
+          NextToken: nextToken,
+        },
         (err, data) => {
           if (err) {
             reject(err)
