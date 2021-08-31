@@ -36,6 +36,7 @@ USAGE
 * [`hckre aws:ssm`](#hckre-awsssm)
 * [`hckre help [COMMAND]`](#hckre-help-command)
 * [`hckre info`](#hckre-info)
+* [`hckre init`](#hckre-init)
 * [`hckre mcs:deploy`](#hckre-mcsdeploy)
 * [`hckre mcs:logs`](#hckre-mcslogs)
 * [`hckre mcs:run`](#hckre-mcsrun)
@@ -151,6 +152,19 @@ display information about cli
 ```
 USAGE
   $ hckre info
+```
+
+## `hckre init`
+
+initialise CLI
+
+```
+USAGE
+  $ hckre init
+
+OPTIONS
+  -h, --help    show CLI help
+  -u, --update  update the existing configurations
 ```
 
 ## `hckre mcs:deploy`

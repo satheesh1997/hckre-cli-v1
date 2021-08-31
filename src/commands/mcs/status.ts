@@ -29,7 +29,7 @@ export default class Status extends Command {
         {
           title: 'Looking for project',
           task: () => {
-            if (!existsSync(`${getProjectDir()}.git/`)) {
+            if (!existsSync(`${getProjectDir(ctx)}.git/`)) {
               ctx.failedChecks += 1
               this.error('project not found')
             }

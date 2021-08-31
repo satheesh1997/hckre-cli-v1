@@ -29,7 +29,7 @@ export default class Start extends Command {
         {
           title: 'Checking for project',
           task: () => {
-            if (!existsSync(`${getProjectDir()}.git/`)) {
+            if (!existsSync(`${getProjectDir(ctx)}.git/`)) {
               ctx.failedChecks += 1
               this.error("project doesn't exist")
             }

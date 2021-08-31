@@ -29,7 +29,7 @@ export default class Logs extends Command {
         {
           title: 'Checking for project',
           task: () => {
-            if (!existsSync(`${getProjectDir()}.git/`)) {
+            if (!existsSync(`${getProjectDir(ctx)}.git/`)) {
               this.error("Project doesn't exist")
             }
           },
