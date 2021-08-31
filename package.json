@@ -1,7 +1,7 @@
 {
   "name": "hckre",
   "description": "HE CLI (Engineering & Support)",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "esc_wq <mail@satheesh.dev>",
   "bin": {
     "hckre": "./bin/run"
