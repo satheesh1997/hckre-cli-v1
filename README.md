@@ -13,6 +13,7 @@ HE CLI (Engineering & Support)
 * [Installation](#installation)
 * [Commands](#commands)
 * [Wiki](#wiki)
+* [Contributors](#contributors)
 <!-- tocstop -->
 
 # Installation
