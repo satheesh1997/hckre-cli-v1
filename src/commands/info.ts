@@ -34,9 +34,19 @@ ${chalk.bold(chalk.yellow('Changelog'))}:
     1. Added init command to configure the cli
     2. Added caching for the instances list in aws:ssm
 
+${chalk.bold(chalk.yellow('Important Links'))}:
+    1. ${chalk.greenBright('[Issues]')} https://github.com/satheesh1997/hckre-cli/issues
+    2. ${chalk.greenBright('[News]')} https://github.com/satheesh1997/hckre-cli/discussions/categories/announcements
+    3. ${chalk.greenBright('[New Ideas]')} https://github.com/satheesh1997/hckre-cli/discussions/categories/ideas
+    4. ${chalk.greenBright('[Wiki]')} https://github.com/satheesh1997/hckre-cli/wiki
+
 ${chalk.bold('Built with')} ${chalk.bold(chalk.redBright('oclif'))}.
 
-${chalk.bold(chalk.greenBright('The developers of this tool are looking for contributors.'))}
+${chalk.bold(
+  chalk.greenBright(
+    'The developers of this tool are looking for contributors. We are now public for everyone to contribute.'
+  )
+)}
     `
     cli.info(message)
     this.exit(0)
