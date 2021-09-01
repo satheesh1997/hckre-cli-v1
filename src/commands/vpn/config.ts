@@ -1,10 +1,10 @@
 import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
-import * as chalk from 'chalk'
-import * as fs from 'fs'
-import * as os from 'os'
-import * as sudo from 'sudo-prompt'
+import chalk from 'chalk'
+import fs from 'fs'
+import os from 'os'
+import sudo from 'sudo-prompt'
 
 import { SUDO_PROMPT_OPTIONS, DEFAULT_VPN_CONFIG_PATH } from '../../constants'
 

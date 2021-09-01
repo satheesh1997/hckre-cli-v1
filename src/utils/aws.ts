@@ -1,4 +1,4 @@
-import * as AWS from 'aws-sdk'
+import AWS from 'aws-sdk'
 import { HckreContext } from '../api/context'
 
 const ctx = HckreContext.get()

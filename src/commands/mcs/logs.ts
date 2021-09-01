@@ -2,8 +2,8 @@ import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 import { existsSync } from 'fs'
 
-import * as chalk from 'chalk'
-import * as Listr from 'listr'
+import chalk from 'chalk'
+import Listr from 'listr'
 
 import { HckreContext } from '../../api/context'
 import { deploymentPlatform, DEPLOYMENT_PLATFORM_KEY } from '../../common-flags'
@@ -45,7 +45,7 @@ export default class Logs extends Command {
               return 'services not running'
             }
           },
-          task: () => {},
+          task: () => { },
         },
       ],
       checkListrOptions

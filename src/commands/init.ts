@@ -2,9 +2,9 @@ import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 import { ConfigIniParser } from 'config-ini-parser'
 
-import * as chalk from 'chalk'
-import * as fs from 'fs'
-import * as inquirer from 'inquirer'
+import chalk from 'chalk'
+import fs from 'fs'
+import inquirer from 'inquirer'
 
 import { HckreContext } from '../api/context'
 import { getCLIConfigurationFilePath, createCLIDefaultConfigFile } from '../utils'

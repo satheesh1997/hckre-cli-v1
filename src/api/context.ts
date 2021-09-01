@@ -1,7 +1,7 @@
 import Command from '@oclif/command'
-import * as os from 'os'
-import * as path from 'path'
-import * as Listr from 'listr'
+import os from 'os'
+import path from 'path'
+import Listr from 'listr'
 import { DEPLOYMENT_PLATFORM_KEY } from '../common-flags'
 
 export namespace HckreContext {

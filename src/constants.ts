@@ -1,4 +1,4 @@
-import * as os from 'os'
+import os from 'os'
 
 export const DOCKER: string = 'docker'
 export const MUMBAI_REGION: string = 'ap-south-1'

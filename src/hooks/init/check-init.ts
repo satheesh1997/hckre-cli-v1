@@ -1,7 +1,7 @@
 import { Hook } from '@oclif/config'
 
-import * as chalk from 'chalk'
-import * as fs from 'fs'
+import chalk from 'chalk'
+import fs from 'fs'
 
 const hook: Hook<'init'> = async function (opts) {
   if (opts.id == 'readme') {

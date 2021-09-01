@@ -1,10 +1,10 @@
 import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
-import * as chalk from 'chalk'
-import * as execa from 'execa'
-import * as fs from 'fs'
-import * as Listr from 'listr'
+import chalk from 'chalk'
+import execa from 'execa'
+import fs from 'fs'
+import Listr from 'listr'
 
 import { HckreContext } from '../../api/context'
 import { deploymentPlatform, DEPLOYMENT_PLATFORM_KEY } from '../../common-flags'

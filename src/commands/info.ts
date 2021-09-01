@@ -1,7 +1,7 @@
 import { Command } from '@oclif/command'
 import { cli } from 'cli-ux'
 
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
 export default class Info extends Command {
   static description = 'display information about cli'
@@ -43,10 +43,10 @@ ${chalk.bold(chalk.yellow('Important Links'))}:
 ${chalk.bold('Built with')} ${chalk.bold(chalk.redBright('oclif'))}.
 
 ${chalk.bold(
-  chalk.greenBright(
-    'The developers of this tool are looking for contributors. We are now public for everyone to contribute.'
-  )
-)}
+      chalk.greenBright(
+        'The developers of this tool are looking for contributors. We are now public for everyone to contribute.'
+      )
+    )}
     `
     cli.info(message)
     this.exit(0)

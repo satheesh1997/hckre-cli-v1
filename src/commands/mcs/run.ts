@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import { spawnSync } from 'child_process'
 
-import * as inquirer from 'inquirer'
+import inquirer from 'inquirer'
 
 export default class Run extends Command {
   static description = 'run a command'
