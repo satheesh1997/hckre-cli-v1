@@ -103,7 +103,7 @@
     "version": "oclif-dev readme && git add README.md",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
-    "format": "prettier \"./src/**/*.+(js|jsx|css|less|scss|ts|tsx|md)\"",
+    "format": "prettier \"./src/**/*.+(js|jsx|css|less|scss|ts|tsx|md)\" --check",
     "format:fix": "prettier \"./src/**/*.+(js|jsx|css|less|scss|ts|tsx|md)\" --write"
   },
   "types": "lib/index.d.ts",
