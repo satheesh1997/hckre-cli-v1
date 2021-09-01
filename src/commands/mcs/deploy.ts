@@ -64,7 +64,7 @@ export default class Deploy extends Command {
               return 'already cloned'
             }
           },
-          task: () => execa('git', ['clone', '--recurse-submodules', config.mcs.git], { cwd: config.basic.path }),
+          task: () => execa('git', ['clone', '--recurse-submodules', config.mcs.git, config.mcs.dir], { cwd: config.basic.path }),
         },
         {
           title: 'Setting git author name',
