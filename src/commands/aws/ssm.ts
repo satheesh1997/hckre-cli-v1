@@ -55,12 +55,11 @@ export default class SSM extends Command {
         const { mtime } = fs.statSync(instanceCahceListPath)
         const staleAt = new Date(mtime.valueOf() + 1000 * 60 * 60 * 24 * 1) // one day
         return staleAt < new Date()
-      } else {
-        return false
       }
+      return false
     }
 
-    if (flags['refresh-cache'] || checkRefershRequired()) {
+    if ((flags['refresh-cache'] || checkRefershRequired()) && fs.existsSync(instanceCahceListPath)) {
       fs.unlinkSync(instanceCahceListPath)
     }
 
@@ -99,7 +98,7 @@ export default class SSM extends Command {
     }
 
     // doing nothing on sigint signal to prevent ssm connection getting closed
-    process.on('SIGINT', () => {})
+    process.on('SIGINT', () => { })
 
     spawnSync(`gossm -p ${ctx.AWSProfile} -r ${ctx.AWSRegion} -t ${ctx.AWSInstance} start`, [], {
       stdio: 'inherit',
