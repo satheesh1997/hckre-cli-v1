@@ -17,6 +17,7 @@ export default class Shell extends Command {
         message: 'Choose a shell',
         type: 'list',
         choices: [
+          { name: 'Bash', value: 'docker exec -it mcs.webserver bash' },
           {
             name: 'Django',
             value: 'docker exec -it mcs.webserver bash -c "python manage.py shell_plus"',
