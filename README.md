@@ -10,6 +10,7 @@ HE CLI (Engineering & Support)
 * [hckre](#hckre)
 * [Installation](#installation)
 * [Commands](#commands)
+* [Wiki](#wiki)
 <!-- tocstop -->
 
 # Installation
@@ -343,3 +344,9 @@ OPTIONS
   -h, --help  show CLI help
 ```
 <!-- commandsstop -->
+
+# Wiki
+
+<!-- wiki -->
+[https://github.com/satheesh1997/hckre-cli/wiki](https://github.com/satheesh1997/hckre-cli/wiki)
+<!-- wikistop -->
