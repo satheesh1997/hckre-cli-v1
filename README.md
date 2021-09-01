@@ -2,6 +2,8 @@
 
 HE CLI (Engineering & Support)
 
+[![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml) [![npm version](https://badge.fury.io/js/hckre.svg)](https://badge.fury.io/js/hckre)
+
 
 [![asciicast](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw.svg)](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw)
 
@@ -350,3 +352,9 @@ OPTIONS
 <!-- wiki -->
 [https://github.com/satheesh1997/hckre-cli/wiki](https://github.com/satheesh1997/hckre-cli/wiki)
 <!-- wikistop -->
+
+# Contributors
+
+<a href = "https://github.com/satheesh1997/hckre-cli/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=satheesh1997/hckre-cli"/>
+</a>
