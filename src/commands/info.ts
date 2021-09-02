@@ -1,7 +1,7 @@
 import { Command } from '@oclif/command'
 import { cli } from 'cli-ux'
 
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
 export default class Info extends Command {
   static description = 'display information about cli'

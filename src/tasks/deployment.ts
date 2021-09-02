@@ -1,9 +1,9 @@
 import { spawnSync } from 'child_process'
 
-import * as execa from 'execa'
-import * as fs from 'fs'
-import * as yaml from 'js-yaml'
-import * as Listr from 'listr'
+import execa from 'execa'
+import fs from 'fs'
+import yaml from 'js-yaml'
+import Listr from 'listr'
 
 import { HckreContext } from '../api/context'
 import { getProjectDir } from '../utils/mcs'

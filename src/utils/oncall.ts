@@ -1,7 +1,7 @@
 import { cli } from 'cli-ux'
 
-import * as chalk from 'chalk'
-import * as ping from 'node-http-ping'
+import chalk from 'chalk'
+import ping from 'node-http-ping'
 
 export async function pingIndex() {
   cli.action.start(`${chalk.bold(chalk.greenBright('›'))} Pinging www.hackerearth.com`)

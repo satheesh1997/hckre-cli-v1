@@ -3,9 +3,9 @@ import { cli } from 'cli-ux'
 import { ConfigIniParser } from 'config-ini-parser'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 
-import * as chalk from 'chalk'
-import * as inquirer from 'inquirer'
-import * as readline from 'readline'
+import chalk from 'chalk'
+import inquirer from 'inquirer'
+import readline from 'readline'
 
 import { HckreContext } from '../../api/context'
 import {

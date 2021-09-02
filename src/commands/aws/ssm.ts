@@ -2,9 +2,9 @@ import { Command, flags } from '@oclif/command'
 import { spawnSync } from 'child_process'
 import { cli } from 'cli-ux'
 
-import * as chalk from 'chalk'
-import * as fs from 'fs'
-import * as inquirer from 'inquirer'
+import chalk from 'chalk'
+import fs from 'fs'
+import inquirer from 'inquirer'
 
 import { HckreContext } from '../../api/context'
 import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES } from '../../constants'

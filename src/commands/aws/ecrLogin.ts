@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import { spawnSync } from 'child_process'
 
-import * as inquirer from 'inquirer'
+import inquirer from 'inquirer'
 
 import { HckreContext } from '../../api/context'
 import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES } from '../../constants'

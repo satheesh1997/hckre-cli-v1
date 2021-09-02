@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
-import * as sudo from 'sudo-prompt'
+import sudo from 'sudo-prompt'
 
 import { SUDO_PROMPT_OPTIONS } from '../../constants'
 

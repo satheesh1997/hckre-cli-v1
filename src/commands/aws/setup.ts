@@ -1,9 +1,9 @@
 import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
-import * as execa from 'execa'
-import * as fs from 'fs'
-import * as Listr from 'listr'
-import * as sudo from 'sudo-prompt'
+import execa from 'execa'
+import fs from 'fs'
+import Listr from 'listr'
+import sudo from 'sudo-prompt'
 
 import { HckreContext } from '../../api/context'
 import {

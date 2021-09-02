@@ -1,5 +1,5 @@
 import { cli } from 'cli-ux'
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
 import { HckreContext } from '../api/context'
 import { DOCKER, SUPPORTED_DEPLOYMENT_PLATFORMS } from '../constants'

@@ -1,9 +1,9 @@
 import { ConfigIniParser } from 'config-ini-parser'
 
-import * as execa from 'execa'
-import * as fs from 'fs'
-import * as ini from 'ini'
-import * as notifier from 'node-notifier'
+import execa from 'execa'
+import fs from 'fs'
+import ini from 'ini'
+import notifier from 'node-notifier'
 
 import { HckreContext } from '../api/context'
 import { DEFAULT_DEPLOYMENT_PATH, DEFAULT_MCS_DIR } from '../constants'
