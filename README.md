@@ -1,6 +1,6 @@
 # hckre
 
-One-stop CLI for HackerEarth's engineering & support team. Built with :purple_heart: oclif framework.
+One-stop CLI for HackerEarth's engineering & support team.
 
 
 [![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml)
@@ -376,3 +376,5 @@ OPTIONS
 <a href = "https://github.com/satheesh1997/hckre-cli/graphs/contributors">
   <img src = "https://contrib.rocks/image?repo=satheesh1997/hckre-cli"/>
 </a>
+
+Built with :purple_heart: oclif framework.
