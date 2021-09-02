@@ -2,7 +2,11 @@
 
 HE CLI (Engineering & Support)
 
-[![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml) [![npm version](https://badge.fury.io/js/hckre.svg)](https://badge.fury.io/js/hckre)
+[![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml)
+[![Linter](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml) 
+[![Version](https://img.shields.io/npm/v/hckre.svg)](https://npmjs.org/package/hckre)
+[![Downloads/week](https://img.shields.io/npm/dw/hckre.svg)](https://npmjs.org/package/hckre)
+[![License](https://img.shields.io/npm/l/hckre.svg)](https://github.com/satheesh1997/hckre/blob/master/package.json)
 
 
 [![asciicast](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw.svg)](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw)
