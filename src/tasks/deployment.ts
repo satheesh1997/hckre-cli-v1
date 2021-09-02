@@ -42,6 +42,10 @@ class Deployment {
   printServiceLogs() {
     throw new Error('NotImplemented Error')
   }
+
+  getConfigFilePath() {
+    throw new Error('NotImplemented Error')
+  }
 }
 
 export class DockerDeployment extends Deployment {
@@ -129,6 +133,11 @@ export class DockerDeployment extends Deployment {
         task: () => execa('docker-compose', ['version']),
       },
     ]
+  }
+
+  getConfigFilePath() {
+    const ctx = HckreContext.get()
+    return `${getProjectDir(ctx)}docker-compose.yml`
   }
 
   private readDockerComposeFile(): any {

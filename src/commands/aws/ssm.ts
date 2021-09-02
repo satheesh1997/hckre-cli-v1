@@ -55,12 +55,11 @@ export default class SSM extends Command {
         const { mtime } = fs.statSync(instanceCahceListPath)
         const staleAt = new Date(mtime.valueOf() + 1000 * 60 * 60 * 24 * 1) // one day
         return staleAt < new Date()
-      } else {
-        return false
       }
+      return false
     }
 
-    if (flags['refresh-cache'] || checkRefershRequired()) {
+    if ((flags['refresh-cache'] || checkRefershRequired()) && fs.existsSync(instanceCahceListPath)) {
       fs.unlinkSync(instanceCahceListPath)
     }
 

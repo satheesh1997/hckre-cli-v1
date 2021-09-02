@@ -31,10 +31,10 @@ export default class Deploy extends Command {
     const preDeploymentTasks = new Listr(
       [
         {
-          title: 'Looking for project path',
+          title: 'Looking for path',
           skip: () => {
             if (fs.existsSync(config.basic.path)) {
-              return 'path exists'
+              return 'Path exists'
             }
           },
           task: () => fs.mkdirSync(config.basic.path),
@@ -43,7 +43,7 @@ export default class Deploy extends Command {
           title: 'Adding bitbucket.org to known hosts',
           skip: () => {
             if (fs.existsSync(getProjectDir(ctx) + '.git')) {
-              return 'already cloned'
+              return 'Host exists'
             }
           },
           task: () => {
@@ -58,20 +58,21 @@ export default class Deploy extends Command {
           },
         },
         {
-          title: 'Cloning project & dependent submodules',
+          title: 'Cloning mcs & submodules',
           skip: () => {
             if (fs.existsSync(getProjectDir(ctx) + '.git')) {
-              return 'already cloned'
+              return 'Project exists'
             }
           },
-          task: () => execa('git', ['clone', '--recurse-submodules', config.mcs.git], { cwd: config.basic.path }),
+          task: () =>
+            execa('git', ['clone', '--recurse-submodules', config.mcs.git, config.mcs.dir], { cwd: config.basic.path }),
         },
         {
-          title: 'Setting git author name',
+          title: 'Configuring git user.name',
           task: () => execa('git', ['config', 'user.name', config.git.name], { cwd: getProjectDir(ctx) }),
         },
         {
-          title: 'Setting git author email',
+          title: 'Configuring git user.email',
           task: () => execa('git', ['config', 'user.email', config.git.email], { cwd: getProjectDir(ctx) }),
         },
       ],
@@ -97,10 +98,10 @@ export default class Deploy extends Command {
           task: () => preDeploymentTasks,
         },
         {
-          title: 'Looking for docker-compose.yml file',
+          title: 'Looking for deployment configuration file',
           task: () => {
-            if (!fs.existsSync(`${getProjectDir(ctx)}docker-compose.yml`)) {
-              this.error('docker-compose.yml not found')
+            if (!fs.existsSync(deploymentPlatform.getConfigFilePath())) {
+              this.error('Not found')
             }
           },
         },
@@ -133,7 +134,7 @@ export default class Deploy extends Command {
         cli.info(`› Use ${chalk.green('cs')} to change to project directory, after reloading the shell`)
       }
       cli.info(`› Use ${chalk.green('mcs:start')} to start the services`)
-      cli.info(chalk.green('\nHappy Coding !!\n\n'))
+      cli.info(chalk.cyan(chalk.bold('\nHappy Coding !!\n\n')))
       notifyCommandCompletedSuccessfully()
     } else {
       if (ctx.failedChecks > 0) {
