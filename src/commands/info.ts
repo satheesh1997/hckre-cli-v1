@@ -43,10 +43,10 @@ ${chalk.bold(chalk.yellow('Important Links'))}:
 ${chalk.bold('Built with')} ${chalk.bold(chalk.redBright('oclif'))}.
 
 ${chalk.bold(
-      chalk.greenBright(
-        'The developers of this tool are looking for contributors. We are now public for everyone to contribute.'
-      )
-    )}
+  chalk.greenBright(
+    'The developers of this tool are looking for contributors. We are now public for everyone to contribute.'
+  )
+)}
     `
     cli.info(message)
     this.exit(0)

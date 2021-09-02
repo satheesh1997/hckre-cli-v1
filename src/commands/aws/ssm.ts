@@ -98,7 +98,7 @@ export default class SSM extends Command {
     }
 
     // doing nothing on sigint signal to prevent ssm connection getting closed
-    process.on('SIGINT', () => { })
+    process.on('SIGINT', () => {})
 
     spawnSync(`gossm -p ${ctx.AWSProfile} -r ${ctx.AWSRegion} -t ${ctx.AWSInstance} start`, [], {
       stdio: 'inherit',
