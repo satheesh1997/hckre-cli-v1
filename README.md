@@ -13,13 +13,26 @@ HE CLI (Engineering & Support)
 * [Installation](#installation)
 * [Commands](#commands)
 * [Wiki](#wiki)
+* [Contributors](#contributors)
 <!-- tocstop -->
 
 # Installation
 
 <!-- installation -->
+## Binary
 ```sh-session
 $ curl https://hckre-cli.s3.ap-south-1.amazonaws.com/install.sh | bash
+$ hckre COMMAND
+running command...
+$ hckre --help [COMMAND]
+USAGE
+  $ hckre COMMAND
+...
+```
+
+## NPM
+```sh-session
+$ npm install -g hckre
 $ hckre COMMAND
 running command...
 $ hckre --help [COMMAND]

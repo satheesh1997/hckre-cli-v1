@@ -31,7 +31,7 @@ export default class Start extends Command {
           task: () => {
             if (!existsSync(`${getProjectDir(ctx)}.git/`)) {
               ctx.failedChecks += 1
-              this.error("project doesn't exist")
+              this.error("Project doesn't exist")
             }
           },
         },
@@ -43,7 +43,7 @@ export default class Start extends Command {
           title: 'Starting the services',
           skip: () => {
             if (ctx.failedChecks > 0) {
-              return 'services not deployed'
+              return 'Required services not deployed'
             }
           },
           task: () => deploymentPlatform.startServices(),
@@ -53,9 +53,7 @@ export default class Start extends Command {
     )
     try {
       await tasks.run()
-      cli.info('› Services started successfully!!')
       cli.info(`› Service mcs.webserver listening on ${chalk.bold(chalk.green('http://localhost:8000/'))}`)
-      cli.info(`› Use ${chalk.bold(chalk.green('mcs:logs'))} to check the logs`)
     } catch (e) {
       cli.info('\n')
       cli.error(

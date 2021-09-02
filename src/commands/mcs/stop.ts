@@ -42,7 +42,7 @@ export default class Start extends Command {
           title: 'Stopping the services',
           skip: () => {
             if (ctx.failedChecks > 0) {
-              return 'services not running'
+              return 'Services not running'
             }
           },
           task: () => deploymentPlatform.stopServices(),
@@ -52,11 +52,10 @@ export default class Start extends Command {
     )
     try {
       await tasks.run()
-      cli.info('› Services stopped successfully !!')
       cli.info(`› Use ${chalk.bold(chalk.green('mcs:start'))} to start the services again !!`)
     } catch (e) {
       cli.info('\n')
-      cli.error(`Use ${chalk.bold(chalk.green('mcs:start'))} to start the services before starting !!`)
+      cli.error(`Use ${chalk.bold(chalk.green('mcs:start'))} to start the services!!`)
     }
     this.exit(0)
   }
