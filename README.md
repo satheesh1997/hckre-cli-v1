@@ -1,6 +1,7 @@
 # hckre
 
-HE CLI (Engineering & Support)
+One-stop CLI for HackerEarth's engineering & support team. Built with :purple_heart: oclif framework.
+
 
 [![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml)
 [![Linter](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml) 
