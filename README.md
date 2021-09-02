@@ -1,7 +1,7 @@
 # hckre
 
 One-stop CLI for HackerEarth's engineering & support team.
-
+<br/><br/>
 
 [![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml)
 [![Linter](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml) 
@@ -377,4 +377,5 @@ OPTIONS
   <img src = "https://contrib.rocks/image?repo=satheesh1997/hckre-cli"/>
 </a>
 
-Built with :purple_heart: oclif framework.
+<br/><br/>
+Built with :purple_heart: by HackerEarth.
