@@ -1,19 +1,18 @@
-name: prettier
+name: Linters
 on:
   push:
     branches: [ main ]
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [ main ]
-  schedule:
-    - cron: '16 20 * * 4'
+
 jobs:
-  job:
+  lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v1
-      - name: Prepare
+      - name: Setup
         run: npm install
       - name: Prettier
         run: npm run format
+      - name: Pre-Pack
+        run: npm run prepack
