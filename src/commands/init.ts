@@ -11,6 +11,7 @@ import { getCLIConfigurationFilePath, createCLIDefaultConfigFile } from '../util
 
 export default class Init extends Command {
   static description = 'initialise CLI'
+
   static flags = {
     help: flags.help({ char: 'h' }),
     update: flags.boolean({ char: 'u', description: 'update the existing configurations' }),

@@ -1,17 +1,17 @@
 import os from 'os'
 
-export const DOCKER: string = 'docker'
-export const MUMBAI_REGION: string = 'ap-south-1'
-export const SINGAPORE_REGION: string = 'ap-southeast-1'
-export const AWS_PROD: string = 'production'
-export const AWS_STAGE: string = 'staging'
+export const DOCKER = 'docker'
+export const MUMBAI_REGION = 'ap-south-1'
+export const SINGAPORE_REGION = 'ap-southeast-1'
+export const AWS_PROD = 'production'
+export const AWS_STAGE = 'staging'
 
 export const DEFAULT_DEPLOYMENT_PATH: string = os.homedir + '/hackerearth'
-export const DEFAULT_MCS_DIR: string = 'django_mycareerstack'
+export const DEFAULT_MCS_DIR = 'django_mycareerstack'
 export const DEFAULT_DEPLOYMENT_PLATFORM: string = DOCKER
 export const DEFAULT_AWS_CREDENTIALS_DIR: string = os.homedir + '/.aws'
 export const DEFAULT_AWS_CREDENTIALS_FILE_PATH: string = os.homedir + '/.aws/credentials'
-export const DEFAULT_VPN_CONFIG_PATH: string = '/etc/wireguard/hackerearth.conf'
+export const DEFAULT_VPN_CONFIG_PATH = '/etc/wireguard/hackerearth.conf'
 
 export const SUPPORTED_DEPLOYMENT_PLATFORMS: string[] = [DOCKER]
 export const SUPPORTED_AWS_REGIONS: string[] = [MUMBAI_REGION, SINGAPORE_REGION]
@@ -24,7 +24,7 @@ export const AWS_REGIONS_MAP: { [key: string]: string } = {
   [AWS_STAGE]: MUMBAI_REGION,
 }
 
-export const CURRENT_GOSSM_VERSION: string = '1.3.2'
+export const CURRENT_GOSSM_VERSION = '1.3.2'
 
 export const SUDO_PROMPT_OPTIONS = {
   name: 'HackerEarth Command Line',

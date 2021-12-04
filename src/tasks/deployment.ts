@@ -76,7 +76,7 @@ export class DockerDeployment extends Deployment {
             cwd: getProjectDir(ctx),
           }).catch(() => {
             ctx.failedChecks += 1
-            throw new Error(`service not deployed`)
+            throw new Error('service not deployed')
           }),
       })
     })
@@ -96,7 +96,7 @@ export class DockerDeployment extends Deployment {
             cwd: getProjectDir(ctx),
           }).catch(() => {
             ctx.failedChecks += 1
-            throw new Error(`service not running`)
+            throw new Error('service not running')
           }),
       })
     })
@@ -115,7 +115,7 @@ export class DockerDeployment extends Deployment {
 
   printServiceLogs() {
     const ctx = HckreContext.get()
-    spawnSync(`docker-compose logs -f`, [], {
+    spawnSync('docker-compose logs -f', [], {
       stdio: 'inherit',
       shell: true,
       cwd: getProjectDir(ctx),

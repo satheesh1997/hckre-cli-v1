@@ -19,7 +19,7 @@ export default class Down extends Command {
     cli.action.start('› Stopping vpn')
     const runCommand = () => {
       return new Promise((resolve, reject) => {
-        sudo.exec(`wg-quick down hackerearth`, SUDO_PROMPT_OPTIONS, (error, stdout, stderr) => {
+        sudo.exec('wg-quick down hackerearth', SUDO_PROMPT_OPTIONS, (error, stdout, stderr) => {
           if (error) reject(error)
           resolve(stdout)
         })

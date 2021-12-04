@@ -17,7 +17,7 @@ export default class PingServices extends Command {
     const { flags } = this.parse(PingServices)
     const ctx = await HckreContext.initAndGet(flags, this)
     const config = getCLIConfiguration(ctx)
-    let toolsChoices = []
+    const toolsChoices = []
 
     inquirer.registerPrompt('list', require('inquirer-search-list'))
 

@@ -56,7 +56,7 @@ export default class Setup extends Command {
     cli.info(' 1. Installing wireguard')
     cli.info('You might be prompted for your password by sudo')
     cli.info('...')
-    cli.action.start(`› Detecting your linux distribution`)
+    cli.action.start('› Detecting your linux distribution')
     const distribution = await getCurrentLinuxDistribution()
     if (distribution === 'Manjaro') {
       ctx.installCommand = 'pacman -S wireguard-tools  --noconfirm'
@@ -66,7 +66,7 @@ export default class Setup extends Command {
       this.error(`Currently we are not supporting in ${distribution}. Write to us to incase you need support.`)
     }
     cli.action.stop()
-    cli.info(`› Setting up vpn tools`)
+    cli.info('› Setting up vpn tools')
     await tasks.run()
     cli.info('...')
     if (ctx.credentialsExists) {

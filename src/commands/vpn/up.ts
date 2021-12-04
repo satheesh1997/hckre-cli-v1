@@ -19,7 +19,7 @@ export default class Up extends Command {
     cli.action.start('› Starting vpn')
     const runCommand = () => {
       return new Promise((resolve, reject) => {
-        sudo.exec(`wg-quick up hackerearth`, SUDO_PROMPT_OPTIONS, (error, stdout, stderr) => {
+        sudo.exec('wg-quick up hackerearth', SUDO_PROMPT_OPTIONS, (error, stdout, stderr) => {
           if (error) reject(error)
           resolve(stdout)
         })
