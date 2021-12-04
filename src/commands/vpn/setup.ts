@@ -18,6 +18,10 @@ export default class Setup extends Command {
   }
 
   async run() {
+    if (process.platform === 'darwin') {
+      cli.error('hckre vpn:* commands are not available on macOS')
+    }
+
     const { flags } = this.parse(Setup)
     const ctx = await HckreContext.initAndGet(flags, this)
     const tasks = new Listr(

@@ -16,6 +16,10 @@ export default class Config extends Command {
   }
 
   async run() {
+    if (process.platform === 'darwin') {
+      cli.error('hckre vpn:* commands are not available on macOS')
+    }
+
     cli.info('Copying the config requires superuser access')
     cli.info(chalk.redBright('You might be prompted for your password by sudo'))
     cli.info('...')

@@ -13,6 +13,10 @@ export default class Up extends Command {
   }
 
   async run() {
+    if (process.platform === 'darwin') {
+      cli.error('hckre vpn:* commands are not available on macOS')
+    }
+
     cli.info('Starting vpn requires superuser access')
     cli.info('You might be prompted for your password by sudo')
     cli.info('...')
