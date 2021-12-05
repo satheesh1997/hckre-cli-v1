@@ -41,7 +41,7 @@ export default class Init extends Command {
     const basicResponses: any = await inquirer.prompt([
       {
         name: 'path',
-        message: 'path=',
+        message: 'path (working directory) =',
         type: 'input',
         default: configParser.get('basic', 'path'),
       },
@@ -52,7 +52,7 @@ export default class Init extends Command {
     const mcsResponses: any = await inquirer.prompt([
       {
         name: 'git',
-        message: 'git=',
+        message: 'git (clone url) =',
         type: 'input',
         default: configParser.get('mcs', 'git'),
         validate: url => {
@@ -62,7 +62,7 @@ export default class Init extends Command {
       },
       {
         name: 'dir',
-        message: 'dir=',
+        message: 'dir (django_mycareerstack under working directory) =',
         type: 'input',
         default: configParser.get('mcs', 'dir'),
       },

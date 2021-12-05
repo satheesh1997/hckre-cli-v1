@@ -81,7 +81,7 @@ export function createCLIDefaultConfigFile(ctx: any) {
 
   configParser.set('basic', 'path', DEFAULT_DEPLOYMENT_PATH)
 
-  configParser.set('mcs', 'git', '')
+  configParser.set('mcs', 'git', 'git@bitbucket.org:mycareerstack/django_mycareerstack.git')
   configParser.set('mcs', 'dir', DEFAULT_MCS_DIR)
 
   configParser.set('git', 'name', '')
