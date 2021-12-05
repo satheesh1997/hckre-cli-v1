@@ -4,7 +4,6 @@ import chalk from 'chalk'
 import fs from 'fs'
 
 const hook: Hook<'init'> = async function (opts) {
-
   if (opts.id && opts.id.indexOf('mcs:') === -1) {
     return
   }

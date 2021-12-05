@@ -63,6 +63,39 @@ export default class Setup extends Command {
       ],
       ctx.listrOptions
     )
+    const awsDarwinTasks = new Listr(
+      [
+        {
+          title: 'Looking if HomeBrew is available',
+          task: () => execa('brew', ['help']),
+        },
+        {
+          title: 'Looking to install cli via brew',
+          skip: () => {
+            if (fs.existsSync('/usr/bin/aws') || fs.existsSync('/usr/local/bin/aws')) {
+              return 'aws-cli exists'
+            }
+          },
+          task: () => execa('brew', ['install', 'awscli']),
+        },
+        {
+          title: 'Looking to create credentials file',
+          skip: () => {
+            if (fs.existsSync(DEFAULT_AWS_CREDENTIALS_FILE_PATH)) {
+              return 'file exists'
+            }
+            if (!fs.existsSync(DEFAULT_AWS_CREDENTIALS_DIR) && process.geteuid() !== 0) {
+              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, { recursive: true })
+            }
+            if (process.geteuid() === 0) {
+              return `Command ${ctx.commandId} running in sudo sudo mode`
+            }
+          },
+          task: () => execa('touch', [DEFAULT_AWS_CREDENTIALS_FILE_PATH]),
+        },
+      ],
+      ctx.listrOptions
+    )
     const gossmTasks = new Listr(
       [
         {
@@ -143,15 +176,80 @@ export default class Setup extends Command {
       ],
       ctx.listrOptions
     )
-    cli.info('Few steps requires superuser access')
-    cli.info(' 1. Installing aws-cli')
-    cli.info(' 2. Copying gossm to /usr/local/bin/')
-    cli.info('You will be prompted for your password by sudo')
-    cli.info('...\n')
-    cli.info('› Setting up AWS cli')
-    await awsTasks.run()
-    cli.info('› Setting up SSM cli')
-    await gossmTasks.run()
+    const gossmDarwinTasks = new Listr(
+      [
+        {
+          title: 'Looking to skip the setup',
+          skip: () => {
+            if (!fs.existsSync('/usr/local/bin/gossm') || !fs.existsSync('/usr/bin/gossm')) {
+              ctx.skipGossmSetup = false
+              return 'gossm not installed'
+            }
+          },
+          task: async () => {
+            const { stdout } = await execa('gossm --version', { shell: true })
+            const version = stdout.split(' ')[2]
+            if (version === CURRENT_GOSSM_VERSION) {
+              ctx.skipGossmSetup = true
+            }
+          },
+        },
+        {
+          title: 'Looking to clean cache',
+          skip: () => {
+            if (ctx.skipGossmSetup) {
+              return 'gossm exists'
+            }
+            if (fs.existsSync(`${ctx.cacheDir}/gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz`)) {
+              return 'No file found in cache'
+            }
+          },
+          task: () =>
+            execa(`rm -rf gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz gossm`, {
+              shell: true,
+              cwd: ctx.cacheDir,
+            }),
+        },
+        {
+          title: 'Tapping gossm',
+          skip: () => {
+            if (ctx.skipGossmSetup) {
+              return 'gossm exists'
+            }
+          },
+          task: () => execa('brew tap gjbae1212/gossm', { shell: true }),
+        },
+        {
+          title: 'Installing gossm',
+          skip: () => {
+            if (ctx.skipGossmSetup) {
+              return 'gossm exists'
+            }
+          },
+          task: () => execa('brew install gossm', { shell: true }),
+        },
+      ],
+      ctx.listrOptions
+    )
+
+    if (process.platform === 'linux') {
+      cli.info('Few steps requires superuser access')
+      cli.info(' 1. Installing aws-cli')
+      cli.info(' 2. Copying gossm to /usr/local/bin/')
+      cli.info('You will be prompted for your password by sudo')
+      cli.info('...\n')
+      cli.info('› Setting up AWS cli')
+      await awsTasks.run()
+      cli.info('› Setting up SSM cli')
+      await gossmTasks.run()
+    } else if (process.platform === 'darwin') {
+      cli.info('› Setting up AWS cli')
+      await awsDarwinTasks.run()
+      cli.info('› Setting up SSM cli')
+      await gossmDarwinTasks.run()
+    } else {
+      cli.error('Unsupported platform')
+    }
     this.exit(0)
   }
 }
