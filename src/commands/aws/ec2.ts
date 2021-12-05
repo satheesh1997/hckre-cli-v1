@@ -10,6 +10,7 @@ import { HckreContext } from '../../api/context'
 import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES } from '../../constants'
 import { compareObjects } from '../../utils'
 import { findInstances } from '../../utils/aws'
+import { AvailableInstancesTypes } from '../../Types'
 
 export default class EC2 extends Command {
   static description = 'login to ec2'
@@ -49,6 +50,7 @@ export default class EC2 extends Command {
     ctx.AWSRegion = AWS_REGIONS_MAP[ctx.AWSProfile]
 
     const instanceCahceListPath = `${ctx.cacheDir}/${ctx.AWSRegion}_instances-list.json`
+    const lastSelectedInstancesCachePath = `${ctx.cacheDir}/${ctx.AWSRegion}_last_selected_instances.json`
 
     const checkRefershRequired = () => {
       if (fs.existsSync(instanceCahceListPath)) {
@@ -59,12 +61,23 @@ export default class EC2 extends Command {
       return false
     }
 
-    if ((flags['refresh-cache'] || checkRefershRequired()) && fs.existsSync(instanceCahceListPath)) {
-      fs.unlinkSync(instanceCahceListPath)
+    if (flags['refresh-cache'] || checkRefershRequired()) {
+      if (fs.existsSync(instanceCahceListPath)) {
+        fs.unlinkSync(instanceCahceListPath)
+      }
+      if (fs.existsSync(lastSelectedInstancesCachePath)) {
+        fs.unlinkSync(lastSelectedInstancesCachePath)
+      }
+    }
+
+    let previousSelectedInstance = []
+
+    if (fs.existsSync(lastSelectedInstancesCachePath)) {
+      previousSelectedInstance = JSON.parse(fs.readFileSync(lastSelectedInstancesCachePath).toString())
     }
 
     if (!ctx.AWSInstance) {
-      let availableInstances = []
+      let availableInstances: AvailableInstancesTypes = []
 
       if (fs.existsSync(instanceCahceListPath)) {
         cli.action.start(`${chalk.green('?')} ${chalk.bold('Fetching targets from cache')}`)
@@ -85,15 +98,44 @@ export default class EC2 extends Command {
         fs.writeFileSync(instanceCahceListPath, JSON.stringify(availableInstances))
       }
 
+      const previousLatestSelectedInstances = [...previousSelectedInstance].reverse()
+      const changedOrderOfAvailableInstances = [...availableInstances]
+      let lastIndex = 0
+
+      previousLatestSelectedInstances.forEach(name => {
+        const foundIndex = changedOrderOfAvailableInstances.findIndex(instance => instance.name === name)
+
+        if (foundIndex !== -1) {
+          const temp = changedOrderOfAvailableInstances[lastIndex]
+          changedOrderOfAvailableInstances[lastIndex] = changedOrderOfAvailableInstances[foundIndex]
+          changedOrderOfAvailableInstances[foundIndex] = temp
+          lastIndex++
+        }
+      })
+
       const availableInstanceResponse: any = await inquirer.prompt([
         {
           pageSize: 20,
           name: 'instance',
           message: 'Choose a target in AWS',
           type: 'list',
-          choices: availableInstances,
+          choices: changedOrderOfAvailableInstances,
         },
       ])
+
+      const selectedInstanceName = availableInstances.filter(
+        instance => instance.value === availableInstanceResponse.instance
+      )[0].name
+      const previosSelectedInstanceIndex = previousSelectedInstance.indexOf(selectedInstanceName)
+
+      // delete the previous selectedName to preserve unique names in the list
+      if (previosSelectedInstanceIndex !== -1) {
+        delete previousSelectedInstance[previosSelectedInstanceIndex]
+        previousSelectedInstance = previousSelectedInstance.filter(Boolean)
+      }
+      previousSelectedInstance.push(selectedInstanceName)
+      fs.writeFileSync(lastSelectedInstancesCachePath, JSON.stringify(previousSelectedInstance))
+
       ctx.AWSInstance = availableInstanceResponse.instance
     }
 
