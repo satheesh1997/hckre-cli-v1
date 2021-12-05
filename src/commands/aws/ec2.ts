@@ -1,32 +1,32 @@
-import { Command, flags } from '@oclif/command'
-import { spawnSync } from 'child_process'
-import { cli } from 'cli-ux'
+import {Command, flags} from '@oclif/command'
+import {spawnSync} from 'child_process'
+import {cli} from 'cli-ux'
 
 import chalk from 'chalk'
 import fs from 'fs'
 import inquirer from 'inquirer'
 
-import { HckreContext } from '../../api/context'
-import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES } from '../../constants'
-import { compareObjects } from '../../utils'
-import { findInstances } from '../../utils/aws'
+import {HckreContext} from '../../api/context'
+import {AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES} from '../../constants'
+import {compareObjects} from '../../utils'
+import {findInstances} from '../../utils/aws'
 
-export default class SSM extends Command {
-  static description = 'connect to ec2 instance'
+export default class EC2 extends Command {
+  static description = 'login to ec2'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: flags.help({char: 'h'}),
     profile: flags.string({
       char: 'p',
       options: SUPPORTED_AWS_PROFILES,
       description: 'profile in which the instance is running',
     }),
-    target: flags.string({ char: 't', description: 'instanceId to access' }),
-    'refresh-cache': flags.boolean({ char: 'r', description: 'refresh cache instance list for selected profile' }),
+    target: flags.string({char: 't', description: 'instanceId to access'}),
+    'refresh-cache': flags.boolean({char: 'r', description: 'refresh cache instance list for selected profile'}),
   }
 
   async run() {
-    const { flags } = this.parse(SSM)
+    const {flags} = this.parse(EC2)
     const ctx = await HckreContext.initAndGet(flags, this)
 
     ctx.AWSProfile = flags.profile
@@ -52,8 +52,8 @@ export default class SSM extends Command {
 
     const checkRefershRequired = () => {
       if (fs.existsSync(instanceCahceListPath)) {
-        const { mtime } = fs.statSync(instanceCahceListPath)
-        const staleAt = new Date(mtime.valueOf() + 1000 * 60 * 60 * 24 * 1) // one day
+        const {mtime} = fs.statSync(instanceCahceListPath)
+        const staleAt = new Date((mtime.valueOf() + 1000) * 60 * 60 * 24 * 1) // one day
         return staleAt < new Date()
       }
       return false

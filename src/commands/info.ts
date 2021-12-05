@@ -1,5 +1,5 @@
-import { Command } from '@oclif/command'
-import { cli } from 'cli-ux'
+import {Command} from '@oclif/command'
+import {cli} from 'cli-ux'
 
 import chalk from 'chalk'
 
@@ -38,6 +38,9 @@ ${chalk.bold(chalk.yellow('Update'))}:
 
 ${chalk.bold(chalk.yellow('Changelog'))}:
     1. Support for in new macbooks (apple silicon chips)
+    2. Command aws:ecrLogin changed to aws:ecr
+    3. Command aws:ssm changes to aws:ec2
+    4. No need to init the cli if you are not going to use mcs:* commands
 
 ${chalk.bold(chalk.yellow('Important Links'))}:
     1. ${chalk.greenBright('[Issues]')} https://github.com/satheesh1997/hckre-cli/issues

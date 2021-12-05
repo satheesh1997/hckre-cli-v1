@@ -1,11 +1,11 @@
 import AWS from 'aws-sdk'
-import { HckreContext } from '../api/context'
+import {HckreContext} from '../api/context'
 
 const ctx = HckreContext.get()
 
 const getManagedInstances = (): any => {
-  AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: ctx.AWSProfile })
-  const ssm = new AWS.SSM({ region: ctx.AWSRegion })
+  AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: ctx.AWSProfile})
+  const ssm = new AWS.SSM({region: ctx.AWSRegion})
 
   const maxInstances = 200
 
@@ -17,7 +17,7 @@ const getManagedInstances = (): any => {
       ssm.describeInstanceInformation(
         {
           MaxResults: 50,
-          InstanceInformationFilterList: [{ key: 'ResourceType', valueSet: ['EC2Instance'] }],
+          InstanceInformationFilterList: [{key: 'ResourceType', valueSet: ['EC2Instance']}],
           NextToken: nextToken,
         },
         (err, data) => {
@@ -42,11 +42,11 @@ const getManagedInstances = (): any => {
   })
 }
 
-const getDescribeInstances = (instancesFilter: { Filters: { Name: string; Values: string[] }[] }): any =>
+const getDescribeInstances = (instancesFilter: {Filters: {Name: string; Values: string[]}[]}): any =>
   new Promise((resolve, reject) => {
-    AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: ctx.AWSProfile })
+    AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: ctx.AWSProfile})
 
-    new AWS.EC2({ region: ctx.AWSRegion }).describeInstances(instancesFilter, function (error, data) {
+    new AWS.EC2({region: ctx.AWSRegion}).describeInstances(instancesFilter, function (error, data) {
       if (error) return reject(error)
       resolve(data)
     })
@@ -70,7 +70,7 @@ export const findInstances = async () => {
   } else {
     managedInstances.forEach((instance: any) => {
       if (instance.PingStatus === 'Online') {
-        if (instance.ResourceType == 'EC2Instance') {
+        if (instance.ResourceType === 'EC2Instance') {
           ec2InstanceIds.push(instance.InstanceId)
         }
       }
@@ -100,7 +100,7 @@ export const findInstances = async () => {
           },
         ],
       }
-      const describeInstance = await getDescribeInstances(instancesFilter)
+      const describeInstance = getDescribeInstances(instancesFilter)
       describeInstances.push(describeInstance)
     }
   }
@@ -116,15 +116,15 @@ export const findInstances = async () => {
   const responses: any[] = []
 
   reservations.forEach(reservation => {
-    reservation.forEach((rData: { Instances: any[] }) => {
+    reservation.forEach((rData: {Instances: any[]}) => {
       rData.Instances.forEach(instance => {
         let name = ''
-        instance.Tags.forEach((tag: { Key: string; Value: string }) => {
-          if (tag.Key == 'Name') {
+        instance.Tags.forEach((tag: {Key: string; Value: string}) => {
+          if (tag.Key === 'Name') {
             name = tag.Value
           }
         })
-        responses.push({ value: instance.InstanceId, name: `${name}  (${instance.InstanceId})` })
+        responses.push({value: instance.InstanceId, name: `${name}  (${instance.InstanceId})`})
       })
     })
   })

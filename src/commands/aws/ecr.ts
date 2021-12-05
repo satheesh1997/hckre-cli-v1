@@ -1,16 +1,16 @@
-import { Command, flags } from '@oclif/command'
-import { spawnSync } from 'child_process'
+import {Command, flags} from '@oclif/command'
+import {spawnSync} from 'child_process'
 
 import inquirer from 'inquirer'
 
-import { HckreContext } from '../../api/context'
-import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES } from '../../constants'
+import {HckreContext} from '../../api/context'
+import {AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES} from '../../constants'
 
 export default class ECRLogin extends Command {
   static description = 'login to ecr'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: flags.help({char: 'h'}),
     profile: flags.string({
       char: 'p',
       options: SUPPORTED_AWS_PROFILES,
@@ -19,7 +19,7 @@ export default class ECRLogin extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(ECRLogin)
+    const {flags} = this.parse(ECRLogin)
     const ctx = await HckreContext.initAndGet(flags, this)
 
     ctx.AWSProfile = flags.profile

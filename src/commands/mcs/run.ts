@@ -1,5 +1,5 @@
-import { Command, flags } from '@oclif/command'
-import { spawnSync } from 'child_process'
+import {Command, flags} from '@oclif/command'
+import {spawnSync} from 'child_process'
 
 import inquirer from 'inquirer'
 
@@ -7,7 +7,7 @@ export default class Run extends Command {
   static description = 'run a command'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: flags.help({char: 'h'}),
   }
 
   async run() {

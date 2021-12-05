@@ -15,11 +15,11 @@ export const DEFAULT_VPN_CONFIG_PATH = '/etc/wireguard/hackerearth.conf'
 
 export const SUPPORTED_DEPLOYMENT_PLATFORMS: string[] = [DOCKER]
 export const SUPPORTED_AWS_REGIONS: string[] = [MUMBAI_REGION, SINGAPORE_REGION]
-export const SUPPORTED_AWS_REGION_CHOICES: { name: string }[] = [{ name: SINGAPORE_REGION }, { name: MUMBAI_REGION }]
+export const SUPPORTED_AWS_REGION_CHOICES: {name: string}[] = [{name: SINGAPORE_REGION}, {name: MUMBAI_REGION}]
 export const SUPPORTED_AWS_PROFILES: string[] = [AWS_PROD, AWS_STAGE]
-export const SUPPORTED_AWS_PROFILE_CHOICES: { name: string }[] = [{ name: AWS_PROD }, { name: AWS_STAGE }]
+export const SUPPORTED_AWS_PROFILE_CHOICES: {name: string}[] = [{name: AWS_PROD}, {name: AWS_STAGE}]
 
-export const AWS_REGIONS_MAP: { [key: string]: string } = {
+export const AWS_REGIONS_MAP: {[key: string]: string} = {
   [AWS_PROD]: SINGAPORE_REGION,
   [AWS_STAGE]: MUMBAI_REGION,
 }

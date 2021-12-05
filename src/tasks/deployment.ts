@@ -1,16 +1,14 @@
-import { spawnSync } from 'child_process'
+import {spawnSync} from 'child_process'
 
 import execa from 'execa'
 import fs from 'fs'
 import yaml from 'js-yaml'
 import Listr from 'listr'
 
-import { HckreContext } from '../api/context'
-import { getProjectDir } from '../utils/mcs'
+import {HckreContext} from '../api/context'
+import {getProjectDir} from '../utils/mcs'
 
 class Deployment {
-  constructor() {}
-
   createServices() {
     throw new Error('NotImplemented Error')
   }
@@ -105,12 +103,12 @@ export class DockerDeployment extends Deployment {
 
   startServices() {
     const ctx = HckreContext.get()
-    return execa('docker-compose up -d', { shell: true, cwd: getProjectDir(ctx) })
+    return execa('docker-compose up -d', {shell: true, cwd: getProjectDir(ctx)})
   }
 
   stopServices() {
     const ctx = HckreContext.get()
-    return execa('docker-compose down', { shell: true, cwd: getProjectDir(ctx) })
+    return execa('docker-compose down', {shell: true, cwd: getProjectDir(ctx)})
   }
 
   printServiceLogs() {
@@ -142,14 +140,12 @@ export class DockerDeployment extends Deployment {
 
   private readDockerComposeFile(): any {
     const ctx = HckreContext.get()
-    try {
-      const compose = yaml.load(fs.readFileSync(`${getProjectDir(ctx)}docker-compose.yml`, 'utf8'))
-      if (compose) {
-        return compose
-      }
-    } catch (e) {
-      throw e
+    const compose = yaml.load(fs.readFileSync(`${getProjectDir(ctx)}docker-compose.yml`, 'utf8'))
+
+    if (compose) {
+      return compose
     }
+
     throw new Error('Unable to read docker-compose.yml')
   }
 

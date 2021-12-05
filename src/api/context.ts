@@ -1,8 +1,9 @@
+/* eslint-disable no-inner-declarations */
 import Command from '@oclif/command'
 import os from 'os'
 import path from 'path'
 import Listr from 'listr'
-import { DEPLOYMENT_PLATFORM_KEY } from '../common-flags'
+import {DEPLOYMENT_PLATFORM_KEY} from '../common-flags'
 
 export namespace HckreContext {
   export const START_TIME = 'startTime'
@@ -17,7 +18,7 @@ export namespace HckreContext {
 
   export async function init(flags: any, command: Command): Promise<void> {
     ctx.deploymentPlatform = flags[DEPLOYMENT_PLATFORM_KEY] || 'docker'
-    ctx.listrOptions = { collapse: false } as Listr.ListrOptions
+    ctx.listrOptions = {collapse: false} as Listr.ListrOptions
 
     ctx[START_TIME] = Date.now()
     ctx[CONFIG_DIR] = command.config.configDir

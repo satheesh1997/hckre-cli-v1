@@ -1,5 +1,5 @@
-import { Command, flags } from '@oclif/command'
-import { spawnSync } from 'child_process'
+import {Command, flags} from '@oclif/command'
+import {spawnSync} from 'child_process'
 
 import inquirer from 'inquirer'
 
@@ -7,7 +7,7 @@ export default class Shell extends Command {
   static description = 'open a shell'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: flags.help({char: 'h'}),
   }
 
   async run() {
@@ -17,7 +17,7 @@ export default class Shell extends Command {
         message: 'Choose a shell',
         type: 'list',
         choices: [
-          { name: 'Webserver', value: 'docker exec -it mcs.webserver bash' },
+          {name: 'Webserver', value: 'docker exec -it mcs.webserver bash'},
           {
             name: 'Django',
             value: 'docker exec -it mcs.webserver bash -c "python manage.py shell_plus"',

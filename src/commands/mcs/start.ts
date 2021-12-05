@@ -1,24 +1,24 @@
-import { Command, flags } from '@oclif/command'
-import { cli } from 'cli-ux'
-import { existsSync } from 'fs'
+import {Command, flags} from '@oclif/command'
+import {cli} from 'cli-ux'
+import {existsSync} from 'fs'
 
 import chalk from 'chalk'
 import Listr from 'listr'
 
-import { HckreContext } from '../../api/context'
-import { deploymentPlatform, DEPLOYMENT_PLATFORM_KEY } from '../../common-flags'
-import { getDeploymentPlatform, getProjectDir } from '../../utils/mcs'
+import {HckreContext} from '../../api/context'
+import {deploymentPlatform, DEPLOYMENT_PLATFORM_KEY} from '../../common-flags'
+import {getDeploymentPlatform, getProjectDir} from '../../utils/mcs'
 
 export default class Start extends Command {
   static description = 'starts the mcs services'
 
   static flags = {
-    help: flags.help({ char: 'h' }),
+    help: flags.help({char: 'h'}),
     [DEPLOYMENT_PLATFORM_KEY]: deploymentPlatform,
   }
 
   async run() {
-    const { flags } = this.parse(Start)
+    const {flags} = this.parse(Start)
     const ctx = await HckreContext.initAndGet(flags, this)
     const deploymentPlatform = getDeploymentPlatform()
     const checkListrOptions = ctx.listrOptions
@@ -54,7 +54,7 @@ export default class Start extends Command {
     try {
       await tasks.run()
       cli.info(`› Service mcs.webserver listening on ${chalk.bold(chalk.green('http://localhost:8000/'))}`)
-    } catch (e) {
+    } catch (error) {
       cli.info('\n')
       cli.error(
         `\n${ctx.failedChecks} check(s) did not pass !!\nRunning ${chalk.bold(
