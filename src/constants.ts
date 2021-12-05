@@ -24,7 +24,7 @@ export const AWS_REGIONS_MAP: { [key: string]: string } = {
   [AWS_STAGE]: MUMBAI_REGION,
 }
 
-export const CURRENT_GOSSM_VERSION = '1.3.2'
+export const CURRENT_GOSSM_VERSION = 'v1.4.4'
 
 export const SUDO_PROMPT_OPTIONS = {
   name: 'HackerEarth Command Line',

@@ -72,7 +72,7 @@ export default class Setup extends Command {
         {
           title: 'Looking to install cli via brew',
           skip: () => {
-            if (fs.existsSync('/usr/bin/aws') || fs.existsSync('/usr/local/bin/aws')) {
+            if (fs.existsSync('/opt/homebrew/bin/aws')) {
               return 'aws-cli exists'
             }
           },
@@ -181,10 +181,11 @@ export default class Setup extends Command {
         {
           title: 'Looking to skip the setup',
           skip: () => {
-            if (!fs.existsSync('/usr/local/bin/gossm') || !fs.existsSync('/usr/bin/gossm')) {
+            if (!fs.existsSync('/opt/homebrew/bin/gossm')) {
               ctx.skipGossmSetup = false
               return 'gossm not installed'
             }
+            ctx.skipGossmSetup = true
           },
           task: async () => {
             const { stdout } = await execa('gossm --version', { shell: true })
@@ -193,22 +194,6 @@ export default class Setup extends Command {
               ctx.skipGossmSetup = true
             }
           },
-        },
-        {
-          title: 'Looking to clean cache',
-          skip: () => {
-            if (ctx.skipGossmSetup) {
-              return 'gossm exists'
-            }
-            if (fs.existsSync(`${ctx.cacheDir}/gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz`)) {
-              return 'No file found in cache'
-            }
-          },
-          task: () =>
-            execa(`rm -rf gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz gossm`, {
-              shell: true,
-              cwd: ctx.cacheDir,
-            }),
         },
         {
           title: 'Tapping gossm',
