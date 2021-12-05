@@ -151,9 +151,9 @@ export class DockerDeployment extends Deployment {
 
   private downloadWebserverDependentServicesTasks(): Listr.ListrTask[] {
     const ctx = HckreContext.get()
-    const depends_on: [] = this.readDockerComposeFile().services.webserver.depends_on
+    const dependsOn: [] = this.readDockerComposeFile().services.webserver.depends_on
     const tasks: Listr.ListrTask[] = []
-    depends_on.forEach(name => {
+    dependsOn.forEach(name => {
       tasks.push({
         title: name,
         task: () =>

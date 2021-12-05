@@ -45,7 +45,9 @@ export default class Logs extends Command {
               return 'services not running'
             }
           },
-          task: () => {},
+          task: () => {
+            // pass
+          },
         },
       ],
       checkListrOptions

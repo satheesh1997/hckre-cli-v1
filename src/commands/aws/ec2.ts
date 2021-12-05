@@ -97,8 +97,9 @@ export default class EC2 extends Command {
       ctx.AWSInstance = availableInstanceResponse.instance
     }
 
-    // doing nothing on sigint signal to prevent ssm connection getting closed
-    process.on('SIGINT', () => {})
+    process.on('SIGINT', () => {
+      // doing nothing on sigint signal to prevent ssm connection getting closed
+    })
 
     spawnSync(`gossm -p ${ctx.AWSProfile} -r ${ctx.AWSRegion} -t ${ctx.AWSInstance} start`, [], {
       stdio: 'inherit',
