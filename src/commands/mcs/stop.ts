@@ -53,7 +53,7 @@ export default class Start extends Command {
     try {
       await tasks.run()
       cli.info(`› Use ${chalk.bold(chalk.green('mcs:start'))} to start the services again !!`)
-    } catch (e) {
+    } catch (error) {
       cli.info('\n')
       cli.error(`Use ${chalk.bold(chalk.green('mcs:start'))} to start the services!!`)
     }

@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command'
+import { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
@@ -9,8 +9,9 @@ import sudo from 'sudo-prompt'
 import { HckreContext } from '../../api/context'
 import { SUDO_PROMPT_OPTIONS, DEFAULT_VPN_CONFIG_PATH } from '../../constants'
 import { getCurrentLinuxDistribution } from '../../utils'
+import { VPNCommand } from '../../base/commands'
 
-export default class Setup extends Command {
+export default class Setup extends VPNCommand {
   static description = 'install wireguard'
 
   static flags = {
@@ -31,7 +32,7 @@ export default class Setup extends Command {
           },
           task: () =>
             new Promise((resolve, reject) => {
-              sudo.exec(ctx.installCommand, SUDO_PROMPT_OPTIONS, (error, stdout, stderr) => {
+              sudo.exec(ctx.installCommand, SUDO_PROMPT_OPTIONS, (error, stdout) => {
                 if (error) reject(error)
                 resolve(stdout)
               })
@@ -56,7 +57,7 @@ export default class Setup extends Command {
     cli.info(' 1. Installing wireguard')
     cli.info('You might be prompted for your password by sudo')
     cli.info('...')
-    cli.action.start(`› Detecting your linux distribution`)
+    cli.action.start('› Detecting your linux distribution')
     const distribution = await getCurrentLinuxDistribution()
     if (distribution === 'Manjaro') {
       ctx.installCommand = 'pacman -S wireguard-tools  --noconfirm'
@@ -66,7 +67,7 @@ export default class Setup extends Command {
       this.error(`Currently we are not supporting in ${distribution}. Write to us to incase you need support.`)
     }
     cli.action.stop()
-    cli.info(`› Setting up vpn tools`)
+    cli.info('› Setting up vpn tools')
     await tasks.run()
     cli.info('...')
     if (ctx.credentialsExists) {

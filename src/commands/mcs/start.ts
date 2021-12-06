@@ -54,7 +54,7 @@ export default class Start extends Command {
     try {
       await tasks.run()
       cli.info(`› Service mcs.webserver listening on ${chalk.bold(chalk.green('http://localhost:8000/'))}`)
-    } catch (e) {
+    } catch (error) {
       cli.info('\n')
       cli.error(
         `\n${ctx.failedChecks} check(s) did not pass !!\nRunning ${chalk.bold(

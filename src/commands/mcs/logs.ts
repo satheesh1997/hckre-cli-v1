@@ -45,7 +45,9 @@ export default class Logs extends Command {
               return 'services not running'
             }
           },
-          task: () => {},
+          task: () => {
+            // pass
+          },
         },
       ],
       checkListrOptions
@@ -53,7 +55,7 @@ export default class Logs extends Command {
     try {
       await tasks.run()
       deploymentPlatform.printServiceLogs()
-    } catch (e) {
+    } catch (error) {
       cli.info('\n')
       cli.error(`Use ${chalk.bold(chalk.green('mcs:start'))} to start the services before starting !!`)
     }

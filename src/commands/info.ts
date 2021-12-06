@@ -22,6 +22,12 @@ ${chalk.bold(chalk.yellow('Dependencies'))}:
         1. sudo pacman -S git
         2. refer to install docker - https://linuxconfig.org/manjaro-linux-docker-installation
         3. sudo pacman -S docker-compose
+    ${chalk.bold(chalk.blue('macOS'))}
+        1. refer to install brew - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-homebrew-on-macos
+        2. refer to install docker - https://docs.docker.com/desktop/mac/install/
+        3. refer to install rosetta2 - https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/
+        4. xcode-select --install (Install command line development tools)
+        5. refer to install iterm2 - https://iterm2.com/
 
 ${chalk.bold(chalk.yellow('AWS Profiles'))}:
     1. production -> refers to singapore region
@@ -31,8 +37,10 @@ ${chalk.bold(chalk.yellow('Update'))}:
     Use ${chalk.red('hckre update')} to check and update to the latest version.
 
 ${chalk.bold(chalk.yellow('Changelog'))}:
-    1. Added init command to configure the cli
-    2. Added caching for the instances list in aws:ssm
+    1. Support for in new macbooks (apple silicon chips)
+    2. Command aws:ecrLogin changed to aws:ecr
+    3. Command aws:ssm changes to aws:ec2
+    4. No need to init the cli if you are not going to use mcs:* commands
 
 ${chalk.bold(chalk.yellow('Important Links'))}:
     1. ${chalk.greenBright('[Issues]')} https://github.com/satheesh1997/hckre-cli/issues

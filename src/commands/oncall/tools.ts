@@ -17,12 +17,14 @@ export default class PingServices extends Command {
     const { flags } = this.parse(PingServices)
     const ctx = await HckreContext.initAndGet(flags, this)
     const config = getCLIConfiguration(ctx)
-    let toolsChoices = []
+    const toolsChoices = []
 
     inquirer.registerPrompt('list', require('inquirer-search-list'))
 
     for (const tool in config['oncall-tools']) {
-      toolsChoices.push({ name: tool, value: config['oncall-tools'][tool] })
+      if (tool) {
+        toolsChoices.push({ name: tool, value: config['oncall-tools'][tool] })
+      }
     }
 
     const responses: any = await inquirer.prompt([

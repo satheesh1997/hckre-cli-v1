@@ -1,14 +1,14 @@
 import { Command, flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 import { ConfigIniParser } from 'config-ini-parser'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs'
 
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import readline from 'readline'
 
-import { HckreContext } from '../../api/context'
 import {
+  DEFAULT_AWS_CREDENTIALS_DIR,
   DEFAULT_AWS_CREDENTIALS_FILE_PATH,
   SUPPORTED_AWS_PROFILES,
   SUPPORTED_AWS_PROFILE_CHOICES,
@@ -24,7 +24,6 @@ export default class Config extends Command {
 
   async run() {
     const { flags } = this.parse(Config)
-    const ctx = await HckreContext.initAndGet(flags, this)
 
     let awsProfile: any = flags.profile
 
@@ -64,7 +63,7 @@ export default class Config extends Command {
       }
     }
 
-    if (credentialsLines.length == 0) {
+    if (credentialsLines.length === 0) {
       this.error(
         `Invalid credentials. Copy valid credentials from ${chalk.blueBright(
           'https://hackerearth.awsapps.com/start#/'
@@ -121,6 +120,10 @@ export default class Config extends Command {
 
     cli.action.stop()
     cli.action.start(`› Configuring credentials for ${awsProfile}`)
+
+    if (!existsSync(DEFAULT_AWS_CREDENTIALS_DIR)) {
+      mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR)
+    }
 
     if (existsSync(DEFAULT_AWS_CREDENTIALS_FILE_PATH)) {
       const config = readFileSync(DEFAULT_AWS_CREDENTIALS_FILE_PATH)

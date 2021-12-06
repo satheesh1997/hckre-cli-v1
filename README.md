@@ -4,27 +4,28 @@ One-stop CLI for HackerEarth's engineering & support team.
 <br/><br/>
 
 [![CodeQL](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/codeql-analysis.yml)
-[![Linter](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml) 
+[![Linter](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml/badge.svg)](https://github.com/satheesh1997/hckre-cli/actions/workflows/linters.yml)
 [![Version](https://img.shields.io/npm/v/hckre.svg)](https://npmjs.org/package/hckre)
 [![Downloads/week](https://img.shields.io/npm/dw/hckre.svg)](https://npmjs.org/package/hckre)
 [![License](https://img.shields.io/npm/l/hckre.svg)](https://github.com/satheesh1997/hckre/blob/master/package.json)
 
-
 [![asciicast](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw.svg)](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw)
 
-
 <!-- toc -->
-* [hckre](#hckre)
-* [Installation](#installation)
-* [Commands](#commands)
-* [Wiki](#wiki)
-* [Contributors](#contributors)
+
+- [hckre](#hckre)
+- [Installation](#installation)
+- [Commands](#commands)
+- [Wiki](#wiki)
+- [Contributors](#contributors)
 <!-- tocstop -->
 
 # Installation
 
 <!-- installation -->
-## Binary
+
+## Binary (Linux)
+
 ```sh-session
 $ curl https://hckre-cli.s3.ap-south-1.amazonaws.com/install.sh | bash
 $ hckre COMMAND
@@ -35,7 +36,8 @@ USAGE
 ...
 ```
 
-## NPM
+## NPM (Linux, macOS)
+
 ```sh-session
 $ npm install -g hckre
 $ hckre COMMAND
@@ -45,33 +47,35 @@ USAGE
   $ hckre COMMAND
 ...
 ```
+
 <!-- installationstop -->
 
 # Commands
 
 <!-- commands -->
-* [`hckre autocomplete [SHELL]`](#hckre-autocomplete-shell)
-* [`hckre aws:config`](#hckre-awsconfig)
-* [`hckre aws:ecrLogin`](#hckre-awsecrlogin)
-* [`hckre aws:setup`](#hckre-awssetup)
-* [`hckre aws:ssm`](#hckre-awsssm)
-* [`hckre help [COMMAND]`](#hckre-help-command)
-* [`hckre info`](#hckre-info)
-* [`hckre init`](#hckre-init)
-* [`hckre mcs:deploy`](#hckre-mcsdeploy)
-* [`hckre mcs:logs`](#hckre-mcslogs)
-* [`hckre mcs:run`](#hckre-mcsrun)
-* [`hckre mcs:shell`](#hckre-mcsshell)
-* [`hckre mcs:start`](#hckre-mcsstart)
-* [`hckre mcs:status`](#hckre-mcsstatus)
-* [`hckre mcs:stop`](#hckre-mcsstop)
-* [`hckre oncall:ping`](#hckre-oncallping)
-* [`hckre oncall:tools`](#hckre-oncalltools)
-* [`hckre update [CHANNEL]`](#hckre-update-channel)
-* [`hckre vpn:config`](#hckre-vpnconfig)
-* [`hckre vpn:down`](#hckre-vpndown)
-* [`hckre vpn:setup`](#hckre-vpnsetup)
-* [`hckre vpn:up`](#hckre-vpnup)
+
+- [`hckre autocomplete [SHELL]`](#hckre-autocomplete-shell)
+- [`hckre aws:config`](#hckre-awsconfig)
+- [`hckre aws:ecrLogin`](#hckre-awsecrlogin)
+- [`hckre aws:setup`](#hckre-awssetup)
+- [`hckre aws:ssm`](#hckre-awsssm)
+- [`hckre help [COMMAND]`](#hckre-help-command)
+- [`hckre info`](#hckre-info)
+- [`hckre init`](#hckre-init)
+- [`hckre mcs:deploy`](#hckre-mcsdeploy)
+- [`hckre mcs:logs`](#hckre-mcslogs)
+- [`hckre mcs:run`](#hckre-mcsrun)
+- [`hckre mcs:shell`](#hckre-mcsshell)
+- [`hckre mcs:start`](#hckre-mcsstart)
+- [`hckre mcs:status`](#hckre-mcsstatus)
+- [`hckre mcs:stop`](#hckre-mcsstop)
+- [`hckre oncall:ping`](#hckre-oncallping)
+- [`hckre oncall:tools`](#hckre-oncalltools)
+- [`hckre update [CHANNEL]`](#hckre-update-channel)
+- [`hckre vpn:config`](#hckre-vpnconfig)
+- [`hckre vpn:down`](#hckre-vpndown)
+- [`hckre vpn:setup`](#hckre-vpnsetup)
+- [`hckre vpn:up`](#hckre-vpnup)
 
 ## `hckre autocomplete [SHELL]`
 
@@ -363,12 +367,15 @@ USAGE
 OPTIONS
   -h, --help  show CLI help
 ```
+
 <!-- commandsstop -->
 
 # Wiki
 
 <!-- wiki -->
+
 [https://github.com/satheesh1997/hckre-cli/wiki](https://github.com/satheesh1997/hckre-cli/wiki)
+
 <!-- wikistop -->
 
 # Contributors

@@ -11,6 +11,7 @@ import { getCLIConfigurationFilePath, createCLIDefaultConfigFile } from '../util
 
 export default class Init extends Command {
   static description = 'initialise CLI'
+
   static flags = {
     help: flags.help({ char: 'h' }),
     update: flags.boolean({ char: 'u', description: 'update the existing configurations' }),
@@ -40,7 +41,7 @@ export default class Init extends Command {
     const basicResponses: any = await inquirer.prompt([
       {
         name: 'path',
-        message: 'path=',
+        message: 'path (working directory) =',
         type: 'input',
         default: configParser.get('basic', 'path'),
       },
@@ -51,16 +52,17 @@ export default class Init extends Command {
     const mcsResponses: any = await inquirer.prompt([
       {
         name: 'git',
-        message: 'git=',
+        message: 'git (clone url) =',
         type: 'input',
         default: configParser.get('mcs', 'git'),
         validate: url => {
+          // eslint-disable-next-line no-useless-escape
           return /^([A-Za-z0-9]+@|http(|s)\:\/\/)([A-Za-z0-9.]+(:\d+)?)(?::|\/)([\d\/\w.-]+?)(\.git)?$/.test(url)
         },
       },
       {
         name: 'dir',
-        message: 'dir=',
+        message: 'dir (django_mycareerstack under working directory) =',
         type: 'input',
         default: configParser.get('mcs', 'dir'),
       },
@@ -82,6 +84,7 @@ export default class Init extends Command {
         type: 'text',
         default: configParser.get('git', 'email'),
         validate: email => {
+          // eslint-disable-next-line no-useless-escape
           return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
             email
           )

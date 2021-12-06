@@ -9,7 +9,7 @@ const getManagedInstances = (): any => {
 
   const maxInstances = 200
 
-  let readyInstancesList: any[] = []
+  const readyInstancesList: any[] = []
 
   return new Promise((resolve, reject) => {
     let nextToken = ''
@@ -55,7 +55,7 @@ const getDescribeInstances = (instancesFilter: { Filters: { Name: string; Values
 export const findInstances = async () => {
   const managedInstances = await getManagedInstances()
 
-  let ec2InstanceIds: string[] = []
+  const ec2InstanceIds: string[] = []
   let describeInstances: any[] = []
 
   if (managedInstances.length === 0) {
@@ -70,7 +70,7 @@ export const findInstances = async () => {
   } else {
     managedInstances.forEach((instance: any) => {
       if (instance.PingStatus === 'Online') {
-        if (instance.ResourceType == 'EC2Instance') {
+        if (instance.ResourceType === 'EC2Instance') {
           ec2InstanceIds.push(instance.InstanceId)
         }
       }
@@ -100,7 +100,8 @@ export const findInstances = async () => {
           },
         ],
       }
-      const describeInstance = await getDescribeInstances(instancesFilter)
+
+      const describeInstance = getDescribeInstances(instancesFilter)
       describeInstances.push(describeInstance)
     }
   }
@@ -113,14 +114,14 @@ export const findInstances = async () => {
     }
   })
 
-  let responses: any[] = []
+  const responses: any[] = []
 
   reservations.forEach(reservation => {
     reservation.forEach((rData: { Instances: any[] }) => {
       rData.Instances.forEach(instance => {
         let name = ''
         instance.Tags.forEach((tag: { Key: string; Value: string }) => {
-          if (tag.Key == 'Name') {
+          if (tag.Key === 'Name') {
             name = tag.Value
           }
         })

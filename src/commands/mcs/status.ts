@@ -49,7 +49,7 @@ export default class Status extends Command {
     try {
       await tasks.run()
       cli.info(chalk.greenBright('› All the deployed services are running !!'))
-    } catch (e) {
+    } catch (error) {
       cli.info(chalk.bold('\nTip:'))
       cli.info(`  -> Use ${chalk.bold(chalk.green('mcs:deploy'))} to deploy the services`)
       cli.info(`  -> Use ${chalk.bold(chalk.greenBright('mcs:start'))} to start the services`)

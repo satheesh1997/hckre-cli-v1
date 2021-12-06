@@ -1,3 +1,4 @@
+/* eslint-disable no-inner-declarations */
 import Command from '@oclif/command'
 import os from 'os'
 import path from 'path'

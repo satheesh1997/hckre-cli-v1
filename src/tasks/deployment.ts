@@ -9,8 +9,6 @@ import { HckreContext } from '../api/context'
 import { getProjectDir } from '../utils/mcs'
 
 class Deployment {
-  constructor() {}
-
   createServices() {
     throw new Error('NotImplemented Error')
   }
@@ -76,7 +74,7 @@ export class DockerDeployment extends Deployment {
             cwd: getProjectDir(ctx),
           }).catch(() => {
             ctx.failedChecks += 1
-            throw new Error(`service not deployed`)
+            throw new Error('service not deployed')
           }),
       })
     })
@@ -96,7 +94,7 @@ export class DockerDeployment extends Deployment {
             cwd: getProjectDir(ctx),
           }).catch(() => {
             ctx.failedChecks += 1
-            throw new Error(`service not running`)
+            throw new Error('service not running')
           }),
       })
     })
@@ -115,7 +113,7 @@ export class DockerDeployment extends Deployment {
 
   printServiceLogs() {
     const ctx = HckreContext.get()
-    spawnSync(`docker-compose logs -f`, [], {
+    spawnSync('docker-compose logs -f', [], {
       stdio: 'inherit',
       shell: true,
       cwd: getProjectDir(ctx),
@@ -142,22 +140,20 @@ export class DockerDeployment extends Deployment {
 
   private readDockerComposeFile(): any {
     const ctx = HckreContext.get()
-    try {
-      const compose = yaml.load(fs.readFileSync(`${getProjectDir(ctx)}docker-compose.yml`, 'utf8'))
-      if (compose) {
-        return compose
-      }
-    } catch (e) {
-      throw e
+    const compose = yaml.load(fs.readFileSync(`${getProjectDir(ctx)}docker-compose.yml`, 'utf8'))
+
+    if (compose) {
+      return compose
     }
+
     throw new Error('Unable to read docker-compose.yml')
   }
 
   private downloadWebserverDependentServicesTasks(): Listr.ListrTask[] {
     const ctx = HckreContext.get()
-    const depends_on: [] = this.readDockerComposeFile().services.webserver.depends_on
+    const dependsOn: [] = this.readDockerComposeFile().services.webserver.depends_on
     const tasks: Listr.ListrTask[] = []
-    depends_on.forEach(name => {
+    dependsOn.forEach(name => {
       tasks.push({
         title: name,
         task: () =>

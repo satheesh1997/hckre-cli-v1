@@ -11,8 +11,8 @@ import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES 
 import { compareObjects } from '../../utils'
 import { findInstances } from '../../utils/aws'
 
-export default class SSM extends Command {
-  static description = 'connect to ec2 instance'
+export default class EC2 extends Command {
+  static description = 'login to ec2'
 
   static flags = {
     help: flags.help({ char: 'h' }),
@@ -26,7 +26,7 @@ export default class SSM extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(SSM)
+    const { flags } = this.parse(EC2)
     const ctx = await HckreContext.initAndGet(flags, this)
 
     ctx.AWSProfile = flags.profile
@@ -53,7 +53,7 @@ export default class SSM extends Command {
     const checkRefershRequired = () => {
       if (fs.existsSync(instanceCahceListPath)) {
         const { mtime } = fs.statSync(instanceCahceListPath)
-        const staleAt = new Date(mtime.valueOf() + 1000 * 60 * 60 * 24 * 1) // one day
+        const staleAt = new Date((mtime.valueOf() + 1000) * 60 * 60 * 24 * 1) // one day
         return staleAt < new Date()
       }
       return false
@@ -67,7 +67,7 @@ export default class SSM extends Command {
       let availableInstances = []
 
       if (fs.existsSync(instanceCahceListPath)) {
-        cli.action.start(`${chalk.green('?')} ${chalk.bold(`Fetching targets from cache`)}`)
+        cli.action.start(`${chalk.green('?')} ${chalk.bold('Fetching targets from cache')}`)
         availableInstances = JSON.parse(fs.readFileSync(instanceCahceListPath).toString())
         cli.action.stop(`${chalk.cyan('done')}`)
         cli.info(
@@ -97,8 +97,9 @@ export default class SSM extends Command {
       ctx.AWSInstance = availableInstanceResponse.instance
     }
 
-    // doing nothing on sigint signal to prevent ssm connection getting closed
-    process.on('SIGINT', () => {})
+    process.on('SIGINT', () => {
+      // doing nothing on sigint signal to prevent ssm connection getting closed
+    })
 
     spawnSync(`gossm -p ${ctx.AWSProfile} -r ${ctx.AWSRegion} -t ${ctx.AWSInstance} start`, [], {
       stdio: 'inherit',

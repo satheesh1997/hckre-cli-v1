@@ -1,11 +1,12 @@
-import { Command, flags } from '@oclif/command'
+import { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
 import sudo from 'sudo-prompt'
+import { VPNCommand } from '../../base/commands'
 
 import { SUDO_PROMPT_OPTIONS } from '../../constants'
 
-export default class Up extends Command {
+export default class Up extends VPNCommand {
   static description = 'start vpn'
 
   static flags = {
@@ -19,7 +20,7 @@ export default class Up extends Command {
     cli.action.start('› Starting vpn')
     const runCommand = () => {
       return new Promise((resolve, reject) => {
-        sudo.exec(`wg-quick up hackerearth`, SUDO_PROMPT_OPTIONS, (error, stdout, stderr) => {
+        sudo.exec('wg-quick up hackerearth', SUDO_PROMPT_OPTIONS, (error, stdout) => {
           if (error) reject(error)
           resolve(stdout)
         })

@@ -8,13 +8,6 @@ import notifier from 'node-notifier'
 import { HckreContext } from '../api/context'
 import { DEFAULT_DEPLOYMENT_PATH, DEFAULT_MCS_DIR } from '../constants'
 
-export function notifyCommandCompletedSuccessfully(): void {
-  notifier.notify({
-    title: 'HackerEarth CLI',
-    message: getCommandSuccessMessage(),
-  })
-}
-
 export function getCommandSuccessMessage(): string {
   const ctx = HckreContext.get()
 
@@ -36,6 +29,13 @@ export function getCommandSuccessMessage(): string {
   }
 
   return `Command ${ctx[HckreContext.COMMAND_ID]} has completed successfully`
+}
+
+export function notifyCommandCompletedSuccessfully(): void {
+  notifier.notify({
+    title: 'HackerEarth CLI',
+    message: getCommandSuccessMessage(),
+  })
 }
 
 export function compareObjects(object1: any, object2: any, key: any) {
@@ -81,7 +81,7 @@ export function createCLIDefaultConfigFile(ctx: any) {
 
   configParser.set('basic', 'path', DEFAULT_DEPLOYMENT_PATH)
 
-  configParser.set('mcs', 'git', '')
+  configParser.set('mcs', 'git', 'git@bitbucket.org:mycareerstack/django_mycareerstack.git')
   configParser.set('mcs', 'dir', DEFAULT_MCS_DIR)
 
   configParser.set('git', 'name', '')

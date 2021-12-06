@@ -123,7 +123,7 @@ export default class Deploy extends Command {
       ctx.listrOptions
     )
     await deploymentTasks.run(ctx)
-    if (ctx.failedChecks == -1) {
+    if (ctx.failedChecks === -1) {
       if (ctx.firstTimeDeployment) {
         if (fs.existsSync('/bin/bash')) {
           await execa(`echo "alias cs='cd ${getProjectDir(ctx)}'" >> ~/.bashrc`, { shell: true })
