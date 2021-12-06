@@ -1,12 +1,12 @@
-import {ConfigIniParser} from 'config-ini-parser'
+import { ConfigIniParser } from 'config-ini-parser'
 
 import execa from 'execa'
 import fs from 'fs'
 import ini from 'ini'
 import notifier from 'node-notifier'
 
-import {HckreContext} from '../api/context'
-import {DEFAULT_DEPLOYMENT_PATH, DEFAULT_MCS_DIR} from '../constants'
+import { HckreContext } from '../api/context'
+import { DEFAULT_DEPLOYMENT_PATH, DEFAULT_MCS_DIR } from '../constants'
 
 export function getCommandSuccessMessage(): string {
   const ctx = HckreContext.get()
@@ -52,7 +52,7 @@ export function compareObjects(object1: any, object2: any, key: any) {
 }
 
 export async function getCurrentLinuxDistribution() {
-  const {stdout, stderr} = await execa('cat /etc/issue | head -1', {shell: true})
+  const { stdout, stderr } = await execa('cat /etc/issue | head -1', { shell: true })
   if (stderr) {
     throw stderr
   }

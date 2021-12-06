@@ -1,6 +1,6 @@
-import {string} from '@oclif/parser/lib/flags'
+import { string } from '@oclif/parser/lib/flags'
 
-import {DEFAULT_DEPLOYMENT_PLATFORM} from './constants'
+import { DEFAULT_DEPLOYMENT_PLATFORM } from './constants'
 
 export const DEPLOYMENT_PLATFORM_KEY = 'platform'
 export const deploymentPlatform = string({

@@ -1,4 +1,4 @@
-import {Command, flags} from '@oclif/command'
+import { Command, flags } from '@oclif/command'
 import {
   PING_SERVICE_WEBSITE_APP,
   PING_SERVICE_WEBSITE_ASSESSMENT,
@@ -9,13 +9,13 @@ import {
   PING_SERVICE_WEBSITE_STATIC,
   PING_SERVICE_WEBSITE_IDE,
 } from '../../constants'
-import {pingAll, pingApp, pingAssessment, pingIndex, pingApi, pingAuth, pingStatic, pingIde} from '../../utils/oncall'
+import { pingAll, pingApp, pingAssessment, pingIndex, pingApi, pingAuth, pingStatic, pingIde } from '../../utils/oncall'
 
 export default class PingServices extends Command {
   static description = 'ping a service'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: flags.help({ char: 'h' }),
     service: flags.string({
       char: 's',
       options: SUPPORTED_PING_SEVICES,
@@ -24,7 +24,7 @@ export default class PingServices extends Command {
   }
 
   async run() {
-    const {flags} = this.parse(PingServices)
+    const { flags } = this.parse(PingServices)
     switch (flags.service) {
       case PING_SERVICE_WEBSITE_WWW:
         await pingIndex()

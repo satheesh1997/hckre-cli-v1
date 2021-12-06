@@ -1,11 +1,11 @@
-import {Command, flags} from '@oclif/command'
-import {cli} from 'cli-ux'
+import { Command, flags } from '@oclif/command'
+import { cli } from 'cli-ux'
 import execa from 'execa'
 import fs from 'fs'
 import Listr from 'listr'
 import sudo from 'sudo-prompt'
 
-import {HckreContext} from '../../api/context'
+import { HckreContext } from '../../api/context'
 import {
   CURRENT_GOSSM_VERSION,
   DEFAULT_AWS_CREDENTIALS_FILE_PATH,
@@ -17,11 +17,11 @@ export default class Setup extends Command {
   static description = 'setup AWS & SSM access tools'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: flags.help({ char: 'h' }),
   }
 
   async run() {
-    const {flags} = this.parse(Setup)
+    const { flags } = this.parse(Setup)
     const ctx = await HckreContext.initAndGet(flags, this)
     const awsTasks = new Listr(
       [
@@ -52,7 +52,7 @@ export default class Setup extends Command {
               return 'file exists'
             }
             if (!fs.existsSync(DEFAULT_AWS_CREDENTIALS_DIR) && process.geteuid() !== 0) {
-              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, {recursive: true})
+              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, { recursive: true })
             }
             if (process.geteuid() === 0) {
               return `Command ${ctx.commandId} running in sudo sudo mode`
@@ -85,7 +85,7 @@ export default class Setup extends Command {
               return 'file exists'
             }
             if (!fs.existsSync(DEFAULT_AWS_CREDENTIALS_DIR) && process.geteuid() !== 0) {
-              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, {recursive: true})
+              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, { recursive: true })
             }
             if (process.geteuid() === 0) {
               return `Command ${ctx.commandId} running in sudo sudo mode`
@@ -107,7 +107,7 @@ export default class Setup extends Command {
             }
           },
           task: async () => {
-            const {stdout} = await execa('gossm --version', {shell: true})
+            const { stdout } = await execa('gossm --version', { shell: true })
             const version = stdout.split(' ')[2]
             if (version === CURRENT_GOSSM_VERSION) {
               ctx.skipGossmSetup = true
@@ -140,7 +140,7 @@ export default class Setup extends Command {
           task: () =>
             execa(
               `wget https://github.com/gjbae1212/gossm/releases/download/v${CURRENT_GOSSM_VERSION}/gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz`,
-              {shell: true, cwd: ctx.cacheDir}
+              { shell: true, cwd: ctx.cacheDir }
             ),
         },
         {
@@ -151,7 +151,7 @@ export default class Setup extends Command {
             }
           },
           task: () =>
-            execa(`tar -xvzf gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz`, {shell: true, cwd: ctx.cacheDir}),
+            execa(`tar -xvzf gossm_${CURRENT_GOSSM_VERSION}_Linux_x86_64.tar.gz`, { shell: true, cwd: ctx.cacheDir }),
         },
         {
           title: 'Copying gossm to bin',
@@ -188,7 +188,7 @@ export default class Setup extends Command {
             ctx.skipGossmSetup = true
           },
           task: async () => {
-            const {stdout} = await execa('gossm --version', {shell: true})
+            const { stdout } = await execa('gossm --version', { shell: true })
             const version = stdout.split(' ')[2]
             if (version === CURRENT_GOSSM_VERSION) {
               ctx.skipGossmSetup = true
@@ -202,7 +202,7 @@ export default class Setup extends Command {
               return 'gossm exists'
             }
           },
-          task: () => execa('brew tap gjbae1212/gossm', {shell: true}),
+          task: () => execa('brew tap gjbae1212/gossm', { shell: true }),
         },
         {
           title: 'Installing gossm',
@@ -211,7 +211,7 @@ export default class Setup extends Command {
               return 'gossm exists'
             }
           },
-          task: () => execa('brew install gossm', {shell: true}),
+          task: () => execa('brew install gossm', { shell: true }),
         },
       ],
       ctx.listrOptions

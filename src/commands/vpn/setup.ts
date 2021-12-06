@@ -1,20 +1,20 @@
-import {Command, flags} from '@oclif/command'
-import {cli} from 'cli-ux'
+import { Command, flags } from '@oclif/command'
+import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
 import fs from 'fs'
 import Listr from 'listr'
 import sudo from 'sudo-prompt'
 
-import {HckreContext} from '../../api/context'
-import {SUDO_PROMPT_OPTIONS, DEFAULT_VPN_CONFIG_PATH} from '../../constants'
-import {getCurrentLinuxDistribution} from '../../utils'
+import { HckreContext } from '../../api/context'
+import { SUDO_PROMPT_OPTIONS, DEFAULT_VPN_CONFIG_PATH } from '../../constants'
+import { getCurrentLinuxDistribution } from '../../utils'
 
 export default class Setup extends Command {
   static description = 'install wireguard'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: flags.help({ char: 'h' }),
   }
 
   async run() {
@@ -22,7 +22,7 @@ export default class Setup extends Command {
       cli.error('hckre vpn:* commands are not available on macOS')
     }
 
-    const {flags} = this.parse(Setup)
+    const { flags } = this.parse(Setup)
     const ctx = await HckreContext.initAndGet(flags, this)
     const tasks = new Listr(
       [

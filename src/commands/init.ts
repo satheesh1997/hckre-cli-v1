@@ -1,24 +1,24 @@
-import {Command, flags} from '@oclif/command'
-import {cli} from 'cli-ux'
-import {ConfigIniParser} from 'config-ini-parser'
+import { Command, flags } from '@oclif/command'
+import { cli } from 'cli-ux'
+import { ConfigIniParser } from 'config-ini-parser'
 
 import chalk from 'chalk'
 import fs from 'fs'
 import inquirer from 'inquirer'
 
-import {HckreContext} from '../api/context'
-import {getCLIConfigurationFilePath, createCLIDefaultConfigFile} from '../utils'
+import { HckreContext } from '../api/context'
+import { getCLIConfigurationFilePath, createCLIDefaultConfigFile } from '../utils'
 
 export default class Init extends Command {
   static description = 'initialise CLI'
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    update: flags.boolean({char: 'u', description: 'update the existing configurations'}),
+    help: flags.help({ char: 'h' }),
+    update: flags.boolean({ char: 'u', description: 'update the existing configurations' }),
   }
 
   async run() {
-    const {flags} = this.parse(Init)
+    const { flags } = this.parse(Init)
     const ctx = await HckreContext.initAndGet(flags, this)
     const configFile = getCLIConfigurationFilePath(ctx)
     if (fs.existsSync(configFile) && !flags.update) {

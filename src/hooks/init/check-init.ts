@@ -1,4 +1,4 @@
-import {Hook} from '@oclif/config'
+import { Hook } from '@oclif/config'
 
 import chalk from 'chalk'
 import fs from 'fs'

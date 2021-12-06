@@ -1,24 +1,24 @@
-import {Command, flags} from '@oclif/command'
-import {cli} from 'cli-ux'
-import {existsSync} from 'fs'
+import { Command, flags } from '@oclif/command'
+import { cli } from 'cli-ux'
+import { existsSync } from 'fs'
 
 import chalk from 'chalk'
 import Listr from 'listr'
 
-import {HckreContext} from '../../api/context'
-import {deploymentPlatform, DEPLOYMENT_PLATFORM_KEY} from '../../common-flags'
-import {getDeploymentPlatform, getProjectDir} from '../../utils/mcs'
+import { HckreContext } from '../../api/context'
+import { deploymentPlatform, DEPLOYMENT_PLATFORM_KEY } from '../../common-flags'
+import { getDeploymentPlatform, getProjectDir } from '../../utils/mcs'
 
 export default class Status extends Command {
   static description = 'status of deployed services'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: flags.help({ char: 'h' }),
     [DEPLOYMENT_PLATFORM_KEY]: deploymentPlatform,
   }
 
   async run() {
-    const {flags} = this.parse(Status)
+    const { flags } = this.parse(Status)
     const ctx = await HckreContext.initAndGet(flags, this)
     const deploymentPlatform = getDeploymentPlatform()
     const checkListrOptions = ctx.listrOptions

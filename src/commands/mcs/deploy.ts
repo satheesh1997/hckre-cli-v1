@@ -1,26 +1,26 @@
-import {Command, flags} from '@oclif/command'
-import {cli} from 'cli-ux'
+import { Command, flags } from '@oclif/command'
+import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
 import execa from 'execa'
 import fs from 'fs'
 import Listr from 'listr'
 
-import {HckreContext} from '../../api/context'
-import {deploymentPlatform, DEPLOYMENT_PLATFORM_KEY} from '../../common-flags'
-import {getDeploymentPlatform, getProjectDir} from '../../utils/mcs'
-import {notifyCommandCompletedSuccessfully, getCLIConfiguration} from '../../utils'
+import { HckreContext } from '../../api/context'
+import { deploymentPlatform, DEPLOYMENT_PLATFORM_KEY } from '../../common-flags'
+import { getDeploymentPlatform, getProjectDir } from '../../utils/mcs'
+import { notifyCommandCompletedSuccessfully, getCLIConfiguration } from '../../utils'
 
 export default class Deploy extends Command {
   static description = 'deploy mcs services'
 
   static flags = {
-    help: flags.help({char: 'h'}),
+    help: flags.help({ char: 'h' }),
     [DEPLOYMENT_PLATFORM_KEY]: deploymentPlatform,
   }
 
   async run() {
-    const {flags} = this.parse(Deploy)
+    const { flags } = this.parse(Deploy)
     const ctx = await HckreContext.initAndGet(flags, this)
     const config = getCLIConfiguration(ctx)
     if (!fs.existsSync(getProjectDir(ctx))) {
@@ -65,15 +65,15 @@ export default class Deploy extends Command {
             }
           },
           task: () =>
-            execa('git', ['clone', '--recurse-submodules', config.mcs.git, config.mcs.dir], {cwd: config.basic.path}),
+            execa('git', ['clone', '--recurse-submodules', config.mcs.git, config.mcs.dir], { cwd: config.basic.path }),
         },
         {
           title: 'Configuring git user.name',
-          task: () => execa('git', ['config', 'user.name', config.git.name], {cwd: getProjectDir(ctx)}),
+          task: () => execa('git', ['config', 'user.name', config.git.name], { cwd: getProjectDir(ctx) }),
         },
         {
           title: 'Configuring git user.email',
-          task: () => execa('git', ['config', 'user.email', config.git.email], {cwd: getProjectDir(ctx)}),
+          task: () => execa('git', ['config', 'user.email', config.git.email], { cwd: getProjectDir(ctx) }),
         },
       ],
       ctx.listrOptions
@@ -126,10 +126,10 @@ export default class Deploy extends Command {
     if (ctx.failedChecks === -1) {
       if (ctx.firstTimeDeployment) {
         if (fs.existsSync('/bin/bash')) {
-          await execa(`echo "alias cs='cd ${getProjectDir(ctx)}'" >> ~/.bashrc`, {shell: true})
+          await execa(`echo "alias cs='cd ${getProjectDir(ctx)}'" >> ~/.bashrc`, { shell: true })
         }
         if (fs.existsSync('/bin/zsh')) {
-          await execa(`echo "alias cs='cd ${getProjectDir(ctx)}'" >> ~/.zshrc`, {shell: true})
+          await execa(`echo "alias cs='cd ${getProjectDir(ctx)}'" >> ~/.zshrc`, { shell: true })
         }
         cli.info(`› Use ${chalk.green('cs')} to change to project directory, after reloading the shell`)
       }

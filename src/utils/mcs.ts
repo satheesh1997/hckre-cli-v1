@@ -1,10 +1,10 @@
-import {cli} from 'cli-ux'
+import { cli } from 'cli-ux'
 import chalk from 'chalk'
 
-import {HckreContext} from '../api/context'
-import {DOCKER, SUPPORTED_DEPLOYMENT_PLATFORMS} from '../constants'
-import {DockerDeployment} from '../tasks/deployment'
-import {getCLIConfiguration} from '../utils'
+import { HckreContext } from '../api/context'
+import { DOCKER, SUPPORTED_DEPLOYMENT_PLATFORMS } from '../constants'
+import { DockerDeployment } from '../tasks/deployment'
+import { getCLIConfiguration } from '../utils'
 
 export function getDeploymentPlatform(): any {
   const ctx = HckreContext.get()

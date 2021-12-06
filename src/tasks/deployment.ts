@@ -1,12 +1,12 @@
-import {spawnSync} from 'child_process'
+import { spawnSync } from 'child_process'
 
 import execa from 'execa'
 import fs from 'fs'
 import yaml from 'js-yaml'
 import Listr from 'listr'
 
-import {HckreContext} from '../api/context'
-import {getProjectDir} from '../utils/mcs'
+import { HckreContext } from '../api/context'
+import { getProjectDir } from '../utils/mcs'
 
 class Deployment {
   createServices() {
@@ -103,12 +103,12 @@ export class DockerDeployment extends Deployment {
 
   startServices() {
     const ctx = HckreContext.get()
-    return execa('docker-compose up -d', {shell: true, cwd: getProjectDir(ctx)})
+    return execa('docker-compose up -d', { shell: true, cwd: getProjectDir(ctx) })
   }
 
   stopServices() {
     const ctx = HckreContext.get()
-    return execa('docker-compose down', {shell: true, cwd: getProjectDir(ctx)})
+    return execa('docker-compose down', { shell: true, cwd: getProjectDir(ctx) })
   }
 
   printServiceLogs() {

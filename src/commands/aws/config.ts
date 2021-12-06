@@ -1,7 +1,7 @@
-import {Command, flags} from '@oclif/command'
-import {cli} from 'cli-ux'
-import {ConfigIniParser} from 'config-ini-parser'
-import {existsSync, readFileSync, writeFileSync, mkdirSync} from 'fs'
+import { Command, flags } from '@oclif/command'
+import { cli } from 'cli-ux'
+import { ConfigIniParser } from 'config-ini-parser'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs'
 
 import chalk from 'chalk'
 import inquirer from 'inquirer'
@@ -18,12 +18,12 @@ export default class Config extends Command {
   static description = 'configure AWS credentials profile'
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    profile: flags.string({options: SUPPORTED_AWS_PROFILES}),
+    help: flags.help({ char: 'h' }),
+    profile: flags.string({ options: SUPPORTED_AWS_PROFILES }),
   }
 
   async run() {
-    const {flags} = this.parse(Config)
+    const { flags } = this.parse(Config)
 
     let awsProfile: any = flags.profile
 

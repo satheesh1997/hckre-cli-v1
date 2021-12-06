@@ -1,5 +1,5 @@
-import {Command} from '@oclif/command'
-import {cli} from 'cli-ux'
+import { Command } from '@oclif/command'
+import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
 

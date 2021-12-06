@@ -1,4 +1,4 @@
-import {cli} from 'cli-ux'
+import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
 import ping from 'node-http-ping'

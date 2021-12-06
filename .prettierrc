@@ -6,6 +6,5 @@
   "useTabs": false,
   "tabWidth": 2,
   "arrowParens": "avoid",
-  "trailingComma": "es5",
-  "bracketSpacing": false
+  "trailingComma": "es5"
 }
