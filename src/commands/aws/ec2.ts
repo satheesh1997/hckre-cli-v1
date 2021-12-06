@@ -10,7 +10,7 @@ import { HckreContext } from '../../api/context'
 import { AWS_REGIONS_MAP, SUPPORTED_AWS_PROFILES, SUPPORTED_AWS_PROFILE_CHOICES } from '../../constants'
 import { compareObjects } from '../../utils'
 import { findInstances } from '../../utils/aws'
-import { AvailableInstancesTypes } from '../../Types'
+import { AvailableInstaceType } from '../../Types'
 
 export default class EC2 extends Command {
   static description = 'login to ec2'
@@ -77,7 +77,7 @@ export default class EC2 extends Command {
     }
 
     if (!ctx.AWSInstance) {
-      let availableInstances: AvailableInstancesTypes = []
+      let availableInstances: AvailableInstaceType[] = []
 
       if (fs.existsSync(instanceCahceListPath)) {
         cli.action.start(`${chalk.green('?')} ${chalk.bold('Fetching targets from cache')}`)
