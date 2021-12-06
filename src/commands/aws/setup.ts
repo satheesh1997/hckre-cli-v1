@@ -51,11 +51,11 @@ export default class Setup extends Command {
             if (fs.existsSync(DEFAULT_AWS_CREDENTIALS_FILE_PATH)) {
               return 'file exists'
             }
-            if (!fs.existsSync(DEFAULT_AWS_CREDENTIALS_DIR) && process.geteuid() !== 0) {
-              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, { recursive: true })
-            }
             if (process.geteuid() === 0) {
               return `Command ${ctx.commandId} running in sudo sudo mode`
+            }
+            if (!fs.existsSync(DEFAULT_AWS_CREDENTIALS_DIR)) {
+              fs.mkdirSync(DEFAULT_AWS_CREDENTIALS_DIR, { recursive: true })
             }
           },
           task: () => execa('touch', [DEFAULT_AWS_CREDENTIALS_FILE_PATH]),

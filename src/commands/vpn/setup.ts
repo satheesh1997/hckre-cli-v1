@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command'
+import { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
@@ -9,8 +9,9 @@ import sudo from 'sudo-prompt'
 import { HckreContext } from '../../api/context'
 import { SUDO_PROMPT_OPTIONS, DEFAULT_VPN_CONFIG_PATH } from '../../constants'
 import { getCurrentLinuxDistribution } from '../../utils'
+import { VPNCommand } from '../../base/commands'
 
-export default class Setup extends Command {
+export default class Setup extends VPNCommand {
   static description = 'install wireguard'
 
   static flags = {
@@ -18,10 +19,6 @@ export default class Setup extends Command {
   }
 
   async run() {
-    if (process.platform === 'darwin') {
-      cli.error('hckre vpn:* commands are not available on macOS')
-    }
-
     const { flags } = this.parse(Setup)
     const ctx = await HckreContext.initAndGet(flags, this)
     const tasks = new Listr(

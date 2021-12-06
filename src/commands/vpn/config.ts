@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command'
+import { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 
 import chalk from 'chalk'
@@ -7,8 +7,9 @@ import os from 'os'
 import sudo from 'sudo-prompt'
 
 import { SUDO_PROMPT_OPTIONS, DEFAULT_VPN_CONFIG_PATH } from '../../constants'
+import { VPNCommand } from '../../base/commands'
 
-export default class Config extends Command {
+export default class Config extends VPNCommand {
   static description = 'configure vpn credentials'
 
   static flags = {
@@ -16,10 +17,6 @@ export default class Config extends Command {
   }
 
   async run() {
-    if (process.platform === 'darwin') {
-      cli.error('hckre vpn:* commands are not available on macOS')
-    }
-
     cli.info('Copying the config requires superuser access')
     cli.info(chalk.redBright('You might be prompted for your password by sudo'))
     cli.info('...')

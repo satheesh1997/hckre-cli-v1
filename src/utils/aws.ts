@@ -100,6 +100,7 @@ export const findInstances = async () => {
           },
         ],
       }
+
       const describeInstance = getDescribeInstances(instancesFilter)
       describeInstances.push(describeInstance)
     }
