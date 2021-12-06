@@ -12,12 +12,11 @@ One-stop CLI for HackerEarth's engineering & support team.
 [![asciicast](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw.svg)](https://asciinema.org/a/MhFjHIGPQwcd6lh6TRCk9zopw)
 
 <!-- toc -->
-
-- [hckre](#hckre)
-- [Installation](#installation)
-- [Commands](#commands)
-- [Wiki](#wiki)
-- [Contributors](#contributors)
+* [hckre](#hckre)
+* [Installation](#installation)
+* [Commands](#commands)
+* [Wiki](#wiki)
+* [Contributors](#contributors)
 <!-- tocstop -->
 
 # Installation
@@ -53,29 +52,29 @@ USAGE
 # Commands
 
 <!-- commands -->
-
-- [`hckre autocomplete [SHELL]`](#hckre-autocomplete-shell)
-- [`hckre aws:config`](#hckre-awsconfig)
-- [`hckre aws:ecrLogin`](#hckre-awsecrlogin)
-- [`hckre aws:setup`](#hckre-awssetup)
-- [`hckre aws:ssm`](#hckre-awsssm)
-- [`hckre help [COMMAND]`](#hckre-help-command)
-- [`hckre info`](#hckre-info)
-- [`hckre init`](#hckre-init)
-- [`hckre mcs:deploy`](#hckre-mcsdeploy)
-- [`hckre mcs:logs`](#hckre-mcslogs)
-- [`hckre mcs:run`](#hckre-mcsrun)
-- [`hckre mcs:shell`](#hckre-mcsshell)
-- [`hckre mcs:start`](#hckre-mcsstart)
-- [`hckre mcs:status`](#hckre-mcsstatus)
-- [`hckre mcs:stop`](#hckre-mcsstop)
-- [`hckre oncall:ping`](#hckre-oncallping)
-- [`hckre oncall:tools`](#hckre-oncalltools)
-- [`hckre update [CHANNEL]`](#hckre-update-channel)
-- [`hckre vpn:config`](#hckre-vpnconfig)
-- [`hckre vpn:down`](#hckre-vpndown)
-- [`hckre vpn:setup`](#hckre-vpnsetup)
-- [`hckre vpn:up`](#hckre-vpnup)
+* [`hckre autocomplete [SHELL]`](#hckre-autocomplete-shell)
+* [`hckre aws:config`](#hckre-awsconfig)
+* [`hckre aws:ec2`](#hckre-awsec2)
+* [`hckre aws:ecr`](#hckre-awsecr)
+* [`hckre aws:setup`](#hckre-awssetup)
+* [`hckre commands`](#hckre-commands)
+* [`hckre help [COMMAND]`](#hckre-help-command)
+* [`hckre info`](#hckre-info)
+* [`hckre init`](#hckre-init)
+* [`hckre mcs:deploy`](#hckre-mcsdeploy)
+* [`hckre mcs:logs`](#hckre-mcslogs)
+* [`hckre mcs:run`](#hckre-mcsrun)
+* [`hckre mcs:shell`](#hckre-mcsshell)
+* [`hckre mcs:start`](#hckre-mcsstart)
+* [`hckre mcs:status`](#hckre-mcsstatus)
+* [`hckre mcs:stop`](#hckre-mcsstop)
+* [`hckre oncall:ping`](#hckre-oncallping)
+* [`hckre oncall:tools`](#hckre-oncalltools)
+* [`hckre update [CHANNEL]`](#hckre-update-channel)
+* [`hckre vpn:config`](#hckre-vpnconfig)
+* [`hckre vpn:down`](#hckre-vpndown)
+* [`hckre vpn:setup`](#hckre-vpnsetup)
+* [`hckre vpn:up`](#hckre-vpnup)
 
 ## `hckre autocomplete [SHELL]`
 
@@ -113,13 +112,28 @@ OPTIONS
   --profile=production|staging
 ```
 
-## `hckre aws:ecrLogin`
+## `hckre aws:ec2`
+
+login to ec2
+
+```
+USAGE
+  $ hckre aws:ec2
+
+OPTIONS
+  -h, --help                        show CLI help
+  -p, --profile=production|staging  profile in which the instance is running
+  -r, --refresh-cache               refresh cache instance list for selected profile
+  -t, --target=target               instanceId to access
+```
+
+## `hckre aws:ecr`
 
 login to ecr
 
 ```
 USAGE
-  $ hckre aws:ecrLogin
+  $ hckre aws:ecr
 
 OPTIONS
   -h, --help                        show CLI help
@@ -138,20 +152,29 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-## `hckre aws:ssm`
+## `hckre commands`
 
-connect to ec2 instance
+list all the commands
 
 ```
 USAGE
-  $ hckre aws:ssm
+  $ hckre commands
 
 OPTIONS
-  -h, --help                        show CLI help
-  -p, --profile=production|staging  profile in which the instance is running
-  -r, --refresh-cache               refresh cache instance list for selected profile
-  -t, --target=target               instanceId to access
+  -h, --help              show CLI help
+  -j, --json              display unfiltered api data in json format
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --hidden                show hidden commands
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
 ```
+
+_See code: [@oclif/plugin-commands](https://github.com/oclif/plugin-commands/blob/v1.3.0/src/commands/commands.ts)_
 
 ## `hckre help [COMMAND]`
 
@@ -367,7 +390,6 @@ USAGE
 OPTIONS
   -h, --help  show CLI help
 ```
-
 <!-- commandsstop -->
 
 # Wiki
