@@ -20,8 +20,10 @@ get_operating_system() {
   SHORT_UNAME=$(uname -s)
   if [ "${SHORT_UNAME:0:5}" == "Linux" ]; then
     echo "linux"
+  elif [ "${SHORT_UNAME:0:6}" == "Darwin" ]; then
+    echo "darwin"
   else
-    error "Unsupported platform $(uname). Only linux is supported :("
+    error "Unsupported platform $(uname)"
     return 1
   fi
 }
@@ -30,7 +32,7 @@ get_arch() {
   if [ "$(uname -m)" == "x86_64" ]; then
     echo "x64"
   elif [[ "$(uname -m)" == arm* ]]; then
-    echo "arm"
+    echo "arm64"
   else
     error "Unsupported arch $(uname -m)"
     return 1
