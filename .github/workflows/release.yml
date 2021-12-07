@@ -9,12 +9,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: 15
+          node-version: 18
       - run: npm install
       - run: npm install -g @oclif/dev-cli
       - run: npm install -g aws-sdk
-      - run: oclif-dev pack --targets=linux-x64,linux-arm
-      - run: oclif-dev publish --targets=linux-x64,linux-arm
+      - run: oclif-dev pack --targets=linux-x64,linux-arm,darwin-x64,darwin-arm64
+      - run: oclif-dev publish --targets=linux-x64,linux-arm,darwin-x64,darwin-arm64
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
