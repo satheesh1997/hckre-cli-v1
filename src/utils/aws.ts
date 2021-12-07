@@ -68,6 +68,7 @@ export const findInstances = async () => {
       ],
     })
   } else {
+    const describeInstancesPromises: Promise<any>[] = []
     managedInstances.forEach((instance: any) => {
       if (instance.PingStatus === 'Online') {
         if (instance.ResourceType === 'EC2Instance') {
@@ -102,8 +103,9 @@ export const findInstances = async () => {
       }
 
       const describeInstance = getDescribeInstances(instancesFilter)
-      describeInstances.push(describeInstance)
+      describeInstancesPromises.push(describeInstance)
     }
+    describeInstances = await Promise.all(describeInstancesPromises)
   }
 
   const reservations: any[] = []
